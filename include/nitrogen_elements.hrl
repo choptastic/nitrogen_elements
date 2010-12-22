@@ -39,4 +39,8 @@
 -record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
 -record(dialog, {?ACTION_BASE(action_dialog), body="", width="auto", height="auto", show_cancel=false ,buttons=[]}).
 
+%%HTML5
+-record(textbox5, {?ELEMENT_BASE(element_textbox5), text="", html_encode=true,
+		   next, postback, delegate, autocomplete="on"}).
+
 -endif.
