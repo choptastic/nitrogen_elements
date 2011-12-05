@@ -2,7 +2,7 @@
 -define(NITROGEN_ELEMENTS_HRL, ok).
 
 %% NOTE: set the include path bellow to your nitrogen installation location
--include_lib("nitrogen/include/wf.inc").
+-include_lib("nitrogen_core/include/wf.inc").
 
 %% Elements
 -record(force_reload_on_back_button, {?ELEMENT_BASE(element_force_reload_on_back_button)}).
