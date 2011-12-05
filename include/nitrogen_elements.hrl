@@ -42,5 +42,7 @@
 %%HTML5
 -record(textbox5, {?ELEMENT_BASE(element_textbox5), text="", html_encode=true,
 		   next, postback, delegate, autocomplete="on"}).
+-record(formbox5, {?ELEMENT_BASE(element_formbox5), type=text, text="", html_encode=true,
+		   next, postback, delegate, autocomplete="on", placeholder=""}).
 
 -endif.
