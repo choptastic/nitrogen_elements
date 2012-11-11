@@ -23,7 +23,7 @@
 -record(icon, {?ELEMENT_BASE(element_icon), kind, type, url="", body=[]}).
 -record(image_map, {?ELEMENT_BASE(element_image_map), name, body=[]}).
 -record(map_area, {?ELEMENT_BASE(element_map_area), shape, coords, href="", alt=""}).
-		 
+
 %% Actions
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab=-1}).

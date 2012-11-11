@@ -1,10 +1,11 @@
-{application, nitrogen_elements,
- [
-  {description, ""},
-  {vsn, "1"},
-  {registered, []},
-  {applications, [
-                  kernel,
-                  stdlib
-                 ]}
- ]}.
+{application,nitrogen_elements,
+             [{description,[]},
+              {vsn,"1"},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {modules,[action_dialog,action_tabs_methods,element_flot_chart,
+                        element_force_reload_on_back_button,element_formbox5,
+                        element_icon,element_image_map,element_image_x,
+                        element_lightbox_transparent,element_map_area,
+                        element_menu,element_notify,element_tabs,
+                        element_textarea_x,element_textbox5]}]}.
