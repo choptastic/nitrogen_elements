@@ -39,14 +39,16 @@ render_element(Record) ->
 		class = wf:to_list(Record#tabs.class),
 		body = [#listitem{body = tab_link(Tab)} || Tab <- Record#tabs.tabs]
 	    },
-	    [#panel{html_id = Tab#tab.id, body = Tab#tab.body} || Tab <- Record#tabs.tabs]
+	    [#panel{html_id = Tab#tab.id, body = Tab#tab.body} || Tab <- Record#tabs.tabs, Tab#tab.url =:= undefined]
 	]
     }.
 
-tab_link(#tab{id = Id, title = Title}) when is_atom(Id) ->
+tab_link(#tab{url = undefined, id = Id, title = Title}) when is_atom(Id) ->
     #link{url = "#" ++ wf:html_encode(atom_to_list(Id)), body = Title};
-tab_link(#tab{id = Id, title = Title}) when is_list(Id) ->
-    #link{url = "#" ++ wf:html_encode(Id), body = Title}.
+tab_link(#tab{url = undefined, id = Id, title = Title}) when is_list(Id) ->
+    #link{url = "#" ++ wf:html_encode(Id), body = Title};
+tab_link(#tab{url=Url, id=Id, title=Title}) ->
+    #link{url=Url, title = wf:html_encode(Id), body=Title}.
 
 event(Event) ->
     ?PRINT({tabsevent, Event}),
