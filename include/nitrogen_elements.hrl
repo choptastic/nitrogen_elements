@@ -23,6 +23,8 @@
 -record(icon, {?ELEMENT_BASE(element_icon), kind, type, url="", body=[]}).
 -record(image_map, {?ELEMENT_BASE(element_image_map), name, body=[]}).
 -record(map_area, {?ELEMENT_BASE(element_map_area), shape, coords, href="", alt=""}).
+-record(dialog, {?ELEMENT_BASE(element_dialog), title = "", body="", width="auto", height="auto", show_cancel=false ,buttons=[]}).
+
 
 %% Actions
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
@@ -37,7 +39,6 @@
 %-record(tab_length, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_abort, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
--record(dialog, {?ACTION_BASE(action_dialog), body="", width="auto", height="auto", show_cancel=false ,buttons=[]}).
 
 %%HTML5
 -record(textbox5, {?ELEMENT_BASE(element_textbox5), text="", html_encode=true,
