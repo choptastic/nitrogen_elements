@@ -20,18 +20,6 @@ render_element(Record) ->
     Options = action_jquery_effect:options_to_js(Record#tabs.options),
     wf:wire(TabsID, wf:f("jQuery(obj('~s')).tabs(~s)", [TabsID, Options])),
 
-    %% wire standard tabs events to the element, instance of tabs element needs to be tagged to receive events
-    case Record#tabs.tag of
-    	underfined -> skip;
-    	TabsTag ->
-    	    PickledPostbackInfo = wf_event:serialize_event_context(tabsevent, TabsID, TabsID, ?MODULE),
-    	    [wf:wire(TabsID, wf:f("jQuery(obj('~s')).bind('~s', function(e, ui) {
-    		Nitrogen.$queue_event('~s','~s',\"event=\" + e.type + \"&tabs_tag=\" + '~s' + \"&tab=\" + ui.tab + \
-    		\"&panel=\" + ui.panel + \"&index=\" + ui.index)})",
-    		[TabsID, Event, TabsID, PickledPostbackInfo, TabsTag])) ||
-    		Event <- ['tabsselect', 'tabsload', 'tabsshow', 'tabsadd', 'tabsremove', 'tabsenable', 'tabsdisable']]
-    end,
-
     #panel{
 	id = TabsID,
 	body = [
@@ -53,9 +41,7 @@ tab_link(#tab{url=Url, id=Id, title=Title}) ->
 event(Event) ->
     ?PRINT({tabsevent, Event}),
     EventType = wf:q(event),
-    TabsTag = wf:q(tabs_tag),
-    TabAnchor = wf:q(tab),
-    TabPanel = wf:q(panel),
+    TabsID = wf:q(tabs_id),
     TabIndex = wf:q(index),
     Module = wf:page_module(),
-    Module:tabs_event(EventType, TabsTag, TabAnchor, TabPanel, TabIndex).
+    Module:tabs_event(list_to_atom(EventType), TabsID, TabIndex).

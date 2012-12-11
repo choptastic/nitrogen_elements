@@ -39,6 +39,8 @@
 %-record(tab_length, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_abort, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
+-record(tab_event_on, {?ACTION_BASE(action_tabs_methods), event}).
+-record(tab_event_off, {?ACTION_BASE(action_tabs_methods), event}).
 
 %%HTML5
 -record(textbox5, {?ELEMENT_BASE(element_textbox5), text="", html_encode=true,

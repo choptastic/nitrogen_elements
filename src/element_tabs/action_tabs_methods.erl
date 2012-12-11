@@ -25,5 +25,11 @@ render_action(#tab_url{target = Target, tab = Index, url = Url}) ->
 render_action(#tab_abort{target = Target}) ->
     wf:f("jQuery(obj('~s')).tabs('abort');", [Target]);
 render_action(#tab_rotate{target = Target, ms = Ms, continuing = IsContinuing}) ->
-    wf:f("jQuery(obj('~s')).tabs('rotate', ~w, ~s);", [Target, Ms, IsContinuing]).
-
+    wf:f("jQuery(obj('~s')).tabs('rotate', ~w, ~s);", [Target, Ms, IsContinuing]);
+render_action(#tab_event_off{target = Target, event = Event}) ->
+    wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Event]);
+render_action(#tab_event_on{target = Target, event = Event}) ->
+    PickledPostbackInfo = wf_event:serialize_event_context(tabsevent, Target, Target, 'element_tabs'),
+    wf:f("jQuery(obj('~s')).bind('~s', function(e, ui) {
+           Nitrogen.$queue_event('~s','~s',\"event=\" + e.type + \"&tabs_id=\" + '~s' + \"&index=\" + ui.index)})",
+	 [Target, Event, Target, PickledPostbackInfo, Target]).
