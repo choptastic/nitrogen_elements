@@ -5,19 +5,13 @@
 
 reflect() -> record_info(fields, grid).
 
-render_element(#datagrid{id = ID} = Record) ->
-    Id = wf:temp_id(),
+render_element(Record) ->
+    TableId = wf:temp_id(),
 
     %% init jqGrid control with specified options
     Options = options_to_js(Record#datagrid.options),
-    %%wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s)})", [Id, Options])),
-    %% wf:wire(ID, wf:f("$(function(){$('#grid_id').jqGrid(~s)})", [Options])),
-    wf:wire(ID, wf:f("$(function(){$('~s').jqGrid(~s)})", [wf:f('#~s', [Id]), Options])),
-
-    #panel{
-	id = ID,
-	body = [#table{html_id = Id, rows = [#tablerow{cells = []}]}]
-    }.
+    wf:wire(Id, wf:f("$(function(){$(obj('~s')).jqGrid(~s)})", [TableId, Options])),
+    #panel{body = [#table{html_id = table_id, id = TableId, rows = [#tablerow{cells = []}]}]}.
 
 %% tab_link(#tab{url = undefined, id = Id, title = Title}) when is_atom(Id) ->
 %%     #link{url = "#" ++ wf:html_encode(atom_to_list(Id)), body = Title};
