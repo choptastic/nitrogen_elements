@@ -5,13 +5,19 @@
 
 reflect() -> record_info(fields, grid).
 
-render_element(Record) ->
-    TableId = wf:temp_id(),
+render_element(#datagrid{options = GridOptions, html_id = GridHtmlID} = Record) ->
+    ID = Record#datagrid.id,
+    PagerID = "pager_" ++ wf:temp_id(),
 
+    %% add extra options
+    Record1 = Record#datagrid{options = [{pager, wf:f('#~s', [PagerID])}|GridOptions]},
     %% init jqGrid control with specified options
-    Options = options_to_js(Record#datagrid.options),
-    wf:wire(Id, wf:f("$(function(){$(obj('~s')).jqGrid(~s)})", [TableId, Options])),
-    #panel{body = [#table{html_id = table_id, id = TableId, rows = [#tablerow{cells = []}]}]}.
+    Options = options_to_js(Record1#datagrid.options),
+    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s)})", [ID, Options])),
+    #panel{body = [
+	#table{html_id = GridHtmlID, id = ID, rows = [#tablerow{cells = []}]},
+	#panel{html_id = PagerID}
+    ]}.
 
 %% event(Event) ->
 %%     ?PRINT({tabsevent, Event}),
