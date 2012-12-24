@@ -13,13 +13,6 @@ render_element(Record) ->
     wf:wire(Id, wf:f("$(function(){$(obj('~s')).jqGrid(~s)})", [TableId, Options])),
     #panel{body = [#table{html_id = table_id, id = TableId, rows = [#tablerow{cells = []}]}]}.
 
-%% tab_link(#tab{url = undefined, id = Id, title = Title}) when is_atom(Id) ->
-%%     #link{url = "#" ++ wf:html_encode(atom_to_list(Id)), body = Title};
-%% tab_link(#tab{url = undefined, id = Id, title = Title}) when is_list(Id) ->
-%%     #link{url = "#" ++ wf:html_encode(Id), body = Title};
-%% tab_link(#tab{url=Url, id=Id, title=Title}) ->
-%%     #link{url=Url, title = wf:html_encode(Id), body=Title}.
-
 %% event(Event) ->
 %%     ?PRINT({tabsevent, Event}),
 %%     EventType = wf:q(event),
@@ -28,26 +21,10 @@ render_element(Record) ->
 %%     Module = wf:page_module(),
 %%     Module:tabs_event(list_to_atom(EventType), TabsID, TabIndex).
 
-%% %% Options is a list of {Key,Value} tuples
-%% options_to_js(Options) ->
-%%     F = fun({Key, Value}, F1) ->
-%%         if
-%%             is_list(Value) andalso is_tuple(hd(Value)) ->
-%%                 wf:f("~s: '~s'", [Key, F1(Value, F1)]);
-%%             is_list(Value) ->
-%%                 wf:f("~s: '~s'", [Key, wf:js_escape(Value)]);
-%%             is_atom(Value) andalso (Value == true orelse Value == false) ->
-%%                 wf:f("~s: ~s", [Key, Value]);
-%%             is_atom(Value) ->
-%%                 wf:f("~s: '~s'", [Key, Value]);
-%%             true ->
-%%                 wf:f("~s: ~p", [Key, Value])
-%%         end
-%%     end,
-%%     Options1 = [F(X, F) || X <- Options],
-%%     Options2 = string:join(Options1, ","),
-%%     wf:f("{ ~s }", [Options2]).
-
+options_to_js(Options) ->
+    Options1 = [parse(X) || X <- Options],
+    Options2 = string:join(Options1, ","),
+    wf:f("{ ~s }", [Options2]).
 
 parse(Value) when is_list(Value) ->
     Opts = [parse(X) || X <- Value],
@@ -69,9 +46,3 @@ parse({Key, Value}) when is_atom(Value) ->
     wf:f("~s: '~s'", [Key, Value]);
 parse({Key, Value}) ->
     wf:f("~s: ~p", [Key, Value]).
-
-
-options_to_js(Options) ->
-    Options1 = [parse(X) || X <- Options],
-    Options2 = string:join(Options1, ","),
-    wf:f("{ ~s }", [Options2]).
