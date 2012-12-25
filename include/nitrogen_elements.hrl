@@ -24,7 +24,7 @@
 -record(image_map, {?ELEMENT_BASE(element_image_map), name, body=[]}).
 -record(map_area, {?ELEMENT_BASE(element_map_area), shape, coords, href="", alt=""}).
 -record(dialog, {?ELEMENT_BASE(element_dialog), title = "", body="", width="auto", height="auto", show_cancel=false ,buttons=[]}).
--record(datagrid, {?ELEMENT_BASE(element_grid), options=[]}).
+-record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
 
 %% Actions
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
