@@ -61,4 +61,8 @@ parse(Value) when is_list(Value) ->
     Opts1 = string:join(Opts, ", "),
     wf:f("~s", [Opts1]);
 parse(Value) when is_integer(Value) ->
-    wf:f("~p", [Value]).
+    wf:f("~p", [Value]);
+parse(Value) when is_atom(Value) ->
+    wf:f("'~s'", [Value]);
+parse(Value) when is_binary(Value) ->
+    wf:f("'~s'", [wf:js_escape(binary_to_list(Value))]).
