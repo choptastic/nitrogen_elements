@@ -6,6 +6,8 @@
 -include("nitrogen_elements.hrl").
 -compile(export_all).
 
+-define(TABS_ELEMENT, #tabs{}).
+
 render_action(#tab_destroy{target = Target}) ->
     wf:f("jQuery(obj('~s')).tabs('destroy');", [wf:to_js_id(Target)]);
 render_action(#tab_disable{target = Target, tab = Index}) ->
@@ -29,7 +31,7 @@ render_action(#tab_rotate{target = Target, ms = Ms, continuing = IsContinuing}) 
 render_action(#tab_event_off{target = Target, event = Event}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Event]);
 render_action(#tab_event_on{target = Target, event = Event}) ->
-    PickledPostbackInfo = wf_event:serialize_event_context(tabsevent, Target, Target, 'element_tabs'),
+    PickledPostbackInfo = wf_event:serialize_event_context(tabsevent, Target, Target, ?TABS_ELEMENT#tabs.module),
     wf:f("jQuery(obj('~s')).bind('~s', function(e, ui) {
            Nitrogen.$queue_event('~s','~s',\"event=\" + e.type + \"&tabs_id=\" + '~s' + \"&index=\" + ui.index)})",
 	 [Target, Event, Target, PickledPostbackInfo, Target]).
