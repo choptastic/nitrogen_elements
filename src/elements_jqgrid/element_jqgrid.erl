@@ -16,6 +16,16 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))}|GridOptions]},
     %% init jqGrid control with specified options
     Options = options_to_js(Record1#jqgrid.options),
+
+    %% there is a problem with the order of execution of javascript which Nitrogen generates.
+    %% e.g. you might have an event that you want to wire during creation of the custom element
+    %% it might be a call to jQuery function which actully builds the element.
+    %% and you also might want to wire another event to the instance of your custom element
+    %% the second event should only be fired when custom element is fully built.
+    %% the problem is Nitrogen might output javascript for your events in the wrong order, so
+    %% your *second* event gets fired *before* your first event which builds control is executed.
+    %% the only way around this problem I can think of is to use custom events to control the order
+    %% of execution.
     wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);var evt = document.createEvent('Event');
                       evt.initEvent(\"myEvent\", true, true);document.dispatchEvent(evt);})", [ID, Options])),
 
