@@ -42,6 +42,9 @@
 -record(tab_event_on, {?ACTION_BASE(action_tabs_methods), event}).
 -record(tab_event_off, {?ACTION_BASE(action_tabs_methods), event}).
 
+-record(jqgrid_event, {?ACTION_BASE(action_jqgrid), type}).
+
+
 %%HTML5
 -record(textbox5, {?ELEMENT_BASE(element_textbox5), text="", html_encode=true,
 		   next, postback, delegate, autocomplete="on"}).

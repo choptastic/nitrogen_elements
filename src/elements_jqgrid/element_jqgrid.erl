@@ -12,24 +12,25 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     PagerID = "pager_html_id_" ++ wf:temp_id(),
 
     %% ?PRINT({html_id, Record#datagrid.anchor}),
-
     %% add extra options
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))}|GridOptions]},
     %% init jqGrid control with specified options
     Options = options_to_js(Record1#jqgrid.options),
-    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s)})", [ID, Options])),
+    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);var evt = document.createEvent('Event');
+                      evt.initEvent(\"myEvent\", true, true);document.dispatchEvent(evt);})", [ID, Options])),
+
     #panel{body = [
 	#table{html_id = TableHtmlID, id = ID, rows = [#tablerow{cells = []}]},
 	#panel{html_id = PagerID}
     ]}.
 
-%% event(Event) ->
-%%     ?PRINT({tabsevent, Event}),
-%%     EventType = wf:q(event),
-%%     TabsID = wf:q(tabs_id),
-%%     TabIndex = wf:q(index),
-%%     Module = wf:page_module(),
-%%     Module:tabs_event(list_to_atom(EventType), TabsID, TabIndex).
+event(Event) ->
+    ?PRINT({jqgrid_event, Event}).
+    %% EventType = wf:q(event),
+    %% TabsID = wf:q(tabs_id),
+    %% TabIndex = wf:q(index),
+    %% Module = wf:page_module(),
+    %% Module:tabs_event(list_to_atom(EventType), TabsID, TabIndex).
 
 options_to_js(Options) ->
     wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).
