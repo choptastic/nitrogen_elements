@@ -11,7 +11,6 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     TableHtmlID = "grid_html_id_" ++ wf:temp_id(),
     PagerID = "pager_html_id_" ++ wf:temp_id(),
 
-    %% ?PRINT({html_id, Record#datagrid.anchor}),
     %% add extra options
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))}|GridOptions]},
     %% init jqGrid control with specified options
@@ -34,13 +33,11 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 	#panel{html_id = PagerID}
     ]}.
 
-event(Event) ->
-    ?PRINT({jqgrid_event, Event}).
-    %% EventType = wf:q(event),
-    %% TabsID = wf:q(tabs_id),
-    %% TabIndex = wf:q(index),
-    %% Module = wf:page_module(),
-    %% Module:tabs_event(list_to_atom(EventType), TabsID, TabIndex).
+event(EventType) ->
+    %% ?PRINT({jqgrid_event, EventType}),
+    RowId = wf:q(id),
+    Module = wf:page_module(),
+    Module:jqgrid_event(EventType, RowId).
 
 options_to_js(Options) ->
     wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).
