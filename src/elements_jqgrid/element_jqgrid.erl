@@ -35,9 +35,10 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 
 event(EventType) ->
     %% ?PRINT({jqgrid_event, EventType}),
-    RowId = wf:q(id),
+    RowId = wf:q(rowid),
+    Status = wf:q(status),
     Module = wf:page_module(),
-    Module:jqgrid_event(EventType, RowId).
+    Module:jqgrid_event(EventType, RowId, Status).
 
 options_to_js(Options) ->
     wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).

@@ -43,6 +43,7 @@
 -record(tab_event_off, {?ACTION_BASE(action_tabs_methods), event}).
 
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), type}).
+-define(ONSELECTROW, onSelectRow).
 
 
 %%HTML5
