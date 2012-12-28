@@ -11,19 +11,24 @@ reflect() -> record_info(fields, tabs).
 
 render_element(Record) ->
     ID = Record#tabs.id,
-
     %% init jQuery tabs control with specified options
     Options = action_jquery_effect:options_to_js(Record#tabs.options),
     wf:wire(ID, wf:f("jQuery(obj('~s')).tabs(~s)", [ID, Options])),
-
+    %% create html markup
     #panel{
 	id = ID,
 	body = [
 	    #list{
 		class = wf:to_list(Record#tabs.class),
+		style = wf:to_list(Record#tabs.style),
 		body = [#listitem{body = tab_link(Tab)} || Tab <- Record#tabs.tabs]
 	    },
-	    [#panel{html_id = Tab#tab.id, body = Tab#tab.body} || Tab <- Record#tabs.tabs, Tab#tab.url =:= undefined]
+	    [#panel{
+		html_id = Tab#tab.id,
+		class = wf:to_list(Tab#tab.class),
+		style = wf:to_list(Tab#tab.style),
+		body = Tab#tab.body
+	    } || Tab <- Record#tabs.tabs, Tab#tab.url =:= undefined]
 	]
     }.
 

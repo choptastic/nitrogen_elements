@@ -10,7 +10,7 @@
 -record(textarea_x, {?ELEMENT_BASE(element_textarea_x), text="", html_encode=true, rows=2, columns=20}).
 -record(link_x, {?ELEMENT_BASE(element_link_x), text="", title="", body="", html_encode=true, url="javascript:", postback}).
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
--record(tab, {id=wf:temp_id(), title="No Title", body=[], tag, url}).
+-record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
 -record(menu, {?ELEMENT_BASE(element_menu), text="", body=[]}).
 -record(lightbox_transparent, {?ELEMENT_BASE(element_lightbox_transparent), body="" }).
 -record(notify, {?ELEMENT_BASE(element_notify), expire=false, msg}).
