@@ -10,18 +10,14 @@
 reflect() -> record_info(fields, tabs).
 
 render_element(Record) ->
-    TabsID =
-	case Record#tabs.id of
-	    undefined -> wf:temp_id();
-	    Other -> Other
-	end,
+    ID = Record#tabs.id,
 
     %% init jQuery tabs control with specified options
     Options = action_jquery_effect:options_to_js(Record#tabs.options),
-    wf:wire(TabsID, wf:f("jQuery(obj('~s')).tabs(~s)", [TabsID, Options])),
+    wf:wire(ID, wf:f("jQuery(obj('~s')).tabs(~s)", [ID, Options])),
 
     #panel{
-	id = TabsID,
+	id = ID,
 	body = [
 	    #list{
 		class = wf:to_list(Record#tabs.class),
@@ -41,7 +37,7 @@ tab_link(#tab{url=Url, id=Id, title=Title}) ->
 event(Event) ->
     ?PRINT({tabsevent, Event}),
     EventType = wf:q(event),
-    TabsID = wf:q(tabs_id),
+    ID = wf:q(tabs_id),
     TabIndex = wf:q(index),
     Module = wf:page_module(),
-    Module:tabs_event(list_to_atom(EventType), TabsID, TabIndex).
+    Module:tabs_event(list_to_atom(EventType), ID, TabIndex).
