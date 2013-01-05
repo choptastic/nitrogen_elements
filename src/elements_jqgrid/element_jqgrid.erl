@@ -1,3 +1,7 @@
+% Nitrogen Elements
+% Copyright (c) 2013 Roman Shestakov (romanshestakov@yahoo.co.uk)
+% See MIT-LICENSE for licensing information.
+
 -module (element_jqgrid).
 -include ("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").

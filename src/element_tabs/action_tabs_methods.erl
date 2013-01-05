@@ -1,5 +1,6 @@
-% Nitrogen Web Framework for Erlang
+% Nitrogen Elements
 % Copyright (c) 2009 Andreas Stenius
+% Contributions from Roman Shestakov (romanshestakov@yahoo.co.uk)
 % See MIT-LICENSE for licensing information.
 
 -module(action_tabs_methods).
