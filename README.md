@@ -1,23 +1,20 @@
 # Nitrogen Elements #
 
-The simpler elements may be used as-is when nitrogen-elements is installed as an erlang lib (i.e. in the erlang libs path, see notice below).
+A collection of useful Web UI controls to be used with Nitrogen Web Framework.
 
-The tabs control needs some additional changes to the javascript and css code.
-For the time being, these changes needs to be applied manually.
+Build instructions:
 
-## Install nitrogen elements as an Erlang library ##
+1. clone / build rebar from here: https://github.com/basho/rebar
+2. include nitrogen_elements dependency to your rebar.config
 
-Run:
-    
-    make
+e.g.
 
-This should compile all elements and place the beam files in the ebin sub directory. Notice: you need to have nitrogen installed (needs to find the wf.inc file).
+{deps, [
+    {nitrogen_elements, ".*", {git, "git@github.com:RomanShestakov/nitrogen_elements.git", "HEAD"}}
+]}.
 
-Add the nitrogen_elements directory to your ERL_LIBS environment variable (or place/clone it to a path already mentioned by ERL_LIBS), then:
-
+3. include nitrogen_elements.hrl to your modules:
     -include_lib("nitrogen_elements/include/nitrogen_elements.hrl").
 
-to use the elements and actions provided by this lib in your code.
-
-N.B. that i.e. the tabs element needs additional changes to the js and css code. See the src/element_tabs/ directory.
+for usage examples see Nitrogen_Elements_Examples project at git@github.com:RomanShestakov/nitrogen_elements_examples.git
 
