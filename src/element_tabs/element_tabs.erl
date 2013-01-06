@@ -13,7 +13,6 @@ reflect() -> record_info(fields, tabs).
 render_element(Record) ->
     ID = Record#tabs.id,
     %% init jQuery tabs control with specified options
-    %% fire up event "tabs_init_completed" on completion
     Options = action_jquery_effect:options_to_js(Record#tabs.options),
     wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);
                           var evt = document.createEvent('Event');
