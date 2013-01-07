@@ -5,24 +5,8 @@
 -include_lib("nitrogen_core/include/wf.inc").
 
 %% Elements
--record(force_reload_on_back_button, {?ELEMENT_BASE(element_force_reload_on_back_button)}).
--record(image_x, {?ELEMENT_BASE(element_image_x), image, alt, width, height, usemap}).
--record(textarea_x, {?ELEMENT_BASE(element_textarea_x), text="", html_encode=true, rows=2, columns=20}).
--record(link_x, {?ELEMENT_BASE(element_link_x), text="", title="", body="", html_encode=true, url="javascript:", postback}).
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
 -record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
--record(menu, {?ELEMENT_BASE(element_menu), text="", body=[]}).
--record(lightbox_transparent, {?ELEMENT_BASE(element_lightbox_transparent), body="" }).
--record(notify, {?ELEMENT_BASE(element_notify), expire=false, msg}).
--record(flot_chart, {?ELEMENT_BASE(element_flot_chart), width, height, title,
-	minx, maxx, miny, maxy, xticks, yticks,
-	modex, modey, modex2, modey2,
-	minx2, maxx2, miny2, maxy2, x2ticks, y2ticks,
-	values, lines=true, points=true, bar=false, selectmode="xy",
-	placeholder, legend, hover, click, select}).
--record(icon, {?ELEMENT_BASE(element_icon), kind, type, url="", body=[]}).
--record(image_map, {?ELEMENT_BASE(element_image_map), name, body=[]}).
--record(map_area, {?ELEMENT_BASE(element_map_area), shape, coords, href="", alt=""}).
 -record(dialog, {?ELEMENT_BASE(element_dialog), title = "", body="", width="auto", height="auto", show_cancel=false ,buttons=[]}).
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
 
@@ -46,12 +30,5 @@
 
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), type}).
 -define(ONSELECTROW, onSelectRow).
-
-
-%%HTML5
--record(textbox5, {?ELEMENT_BASE(element_textbox5), text="", html_encode=true,
-		   next, postback, delegate, autocomplete="on"}).
--record(formbox5, {?ELEMENT_BASE(element_formbox5), type=text, text="", html_encode=true,
-		   next, postback, delegate, autocomplete="on", placeholder=""}).
 
 -endif.
