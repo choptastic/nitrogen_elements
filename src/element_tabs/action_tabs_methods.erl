@@ -28,7 +28,7 @@ render_action(#tab_disable{target = Target, tab = Index}) ->
     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('disable', '~s');",
 							     [wf:to_js_id(Target), Index]));
 render_action(#tab_enable{target = Target, tab = Index}) ->
-    ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target,	wf:f("jQuery(obj('~s')).tabs('enable;, '~s');",
+    ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target,	wf:f("jQuery(obj('~s')).tabs('enable', '~s');",
 							     [wf:to_js_id(Target), Index]));
 render_action(#tab_add{target = Target, url = Url, label = Label}) ->
     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('add', '~s', '~s');",
