@@ -9,7 +9,6 @@
 -define(PROGRESSBAR_ELEMENT, #progressbar{}).
 
 render_action(#progressbar_value{target = Target, value = Value}) ->
-    ?PRINT({target, Target, Value}),
     wf:f("jQuery(obj('~s')).progressbar({value : ~w});", [Target, Value]);
 render_action(#progressbar_disable{target = Target}) ->
     wf:f("jQuery(obj('~s')).progressbar({disabled, true);", [Target]);

@@ -21,6 +21,6 @@ render_element(Record) ->
     #panel{id = ID, html_id = HtmlID, style = Record#progressbar.style, class = Record#progressbar.class}.
 
 event(Event) ->
-    ?PRINT({progressbar_event, Event}),
+    %% ?PRINT({progressbar_event, Event}),
     Module = wf:page_module(),
     Module:event(Event).
