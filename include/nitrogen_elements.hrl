@@ -9,7 +9,6 @@
 		 height="auto", show_cancel=false, buttons=[]}).
 
 %% progress bar
--define(EVENT_PROGRESSBAR_INIT_COMPLETED, 'progressbar_init_completed').
 -record(progressbar, {?ELEMENT_BASE(element_progressbar), options=[]}).
 -record(progressbar_value, {?ACTION_BASE(action_progressbar), value}).
 -record(progressbar_disable, {?ACTION_BASE(action_progressbar)}).

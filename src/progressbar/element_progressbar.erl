@@ -15,10 +15,7 @@ render_element(Record) ->
 
     %% init jQuery progressbar control with specified options
     Options = action_jquery_effect:options_to_js(Record#progressbar.options),
-    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).progressbar(~s);
-                          var evt = document.createEvent('Event');
-                          evt.initEvent('~s', true, true);
-                          document.dispatchEvent(evt);})", [ID, Options, ?EVENT_PROGRESSBAR_INIT_COMPLETED])),
+    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).progressbar(~s);})", [ID, Options])),
 
     %% create html markup
     #panel{id = ID, html_id = HtmlID, style = Record#progressbar.style, class = Record#progressbar.class}.
