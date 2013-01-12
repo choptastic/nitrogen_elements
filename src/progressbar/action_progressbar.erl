@@ -26,10 +26,9 @@ render_action(#progressbar_disable{target = Target}) ->
     wf:f("jQuery(obj('~s')).progressbar({disabled, true);", [Target]);
 render_action(#progressbar_enable{target = Target}) ->
     wf:f("jQuery(obj('~s')).progressbar({disabled, false);", [Target]);
-render_action(#progressbar_event_on{target = Target, event = Event}) ->
-    PickledPostbackInfo = wf_event:serialize_event_context(Event, Target, Target, ?PROGRESSBAR_ELEMENT#progressbar.module),
+render_action(#progressbar_event_on{target = Target, event = Event, postback = Postback}) ->
+    PickledPostbackInfo = wf_event:serialize_event_context(Postback, Target, Target, ?PROGRESSBAR_ELEMENT#progressbar.module),
     ?PROGRESSBAR_EVENT_HOOK(?EVENT_PROGRESSBAR_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).bind(\"~s\", function(e, ui) {
-           Nitrogen.$queue_event('~s', '~s', \"event=\" + e.type + \"&id=\" + '~s')});",
-			  [Target, Event, Target, PickledPostbackInfo, Target]));
+           Nitrogen.$queue_event('~s', '~s')});", [Target, Event, Target, PickledPostbackInfo]));
 render_action(#progressbar_event_off{target = Target, event = Event}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Event]).

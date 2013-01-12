@@ -14,7 +14,7 @@
 -record(progressbar_value, {?ACTION_BASE(action_progressbar), value}).
 -record(progressbar_disable, {?ACTION_BASE(action_progressbar)}).
 -record(progressbar_enable, {?ACTION_BASE(action_progressbar)}).
--record(progressbar_event_on, {?ACTION_BASE(action_progressbar), event}).
+-record(progressbar_event_on, {?ACTION_BASE(action_progressbar), event, postback}).
 -record(progressbar_event_off, {?ACTION_BASE(action_progressbar), event}).
 
 %% Actions

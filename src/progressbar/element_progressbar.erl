@@ -25,7 +25,5 @@ render_element(Record) ->
 
 event(Event) ->
     ?PRINT({progressbar_event, Event}),
-    EventType = wf:q(event),
-    ID = wf:q(id),
     Module = wf:page_module(),
-    Module:progressbar_event(list_to_atom(EventType), ID).
+    Module:event(Event).
