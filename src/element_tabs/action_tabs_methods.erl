@@ -47,7 +47,7 @@ render_action(#tab_select{target = Target, tab = Index}) ->
 %% render_action(#tab_rotate{target = Target, ms = Ms, continuing = IsContinuing}) ->
 %%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('rotate', ~w, ~s);",
 %% 							     [Target, Ms, IsContinuing]));
-render_action(#tab_event_off{target = Target, event = Event}) ->
-    wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Event]);
+render_action(#tab_event_off{target = Target, type = Type}) ->
+    wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->
     #event{type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module}.
