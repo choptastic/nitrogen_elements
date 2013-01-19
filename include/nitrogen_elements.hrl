@@ -16,7 +16,7 @@
 -record(progressbar_event_on, {?ACTION_BASE(action_progressbar), event, postback}).
 -record(progressbar_event_off, {?ACTION_BASE(action_progressbar), event}).
 
-%% Actions
+%% tabs
 -define(EVENT_TABS_INIT_COMPLETED, 'tabs_init_completed').
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
 -record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
@@ -39,5 +39,9 @@
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), type}).
 -define(ONSELECTROW, onSelectRow).
+
+%% menu
+-record(menu, {?ELEMENT_BASE(element_menu), items=[], options=[]}).
+-record(item, {id=wf:temp_id(), title="No Title", class="", style="", items=[]}).
 
 -endif.
