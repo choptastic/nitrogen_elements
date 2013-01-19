@@ -17,8 +17,8 @@
 -record(progressbar_event_off, {?ACTION_BASE(action_progressbar), event}).
 
 %% tabs
--define(EVENT_TABS_INIT_COMPLETED, 'tabs_init_completed').
 -define(EVENT_TABSACTIVATE, 'tabsactivate').
+-define(EVENT_TABSCREATE, 'tabscreate').
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
 -record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
