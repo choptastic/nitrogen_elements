@@ -14,10 +14,12 @@ render_element(Record) ->
     ID = Record#tabs.id,
     %% init jQuery tabs control with specified options
     Options = action_jquery_effect:options_to_js(Record#tabs.options),
-    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);
-                          var evt = document.createEvent('Event');
-                          evt.initEvent('~s', true, true);
-                          document.dispatchEvent(evt);})", [ID, Options, ?EVENT_TABS_INIT_COMPLETED])),
+    %% wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);
+    %%                       var evt = document.createEvent('Event');
+    %%                       evt.initEvent('~s', true, true);
+    %%                       document.dispatchEvent(evt);})", [ID, Options, ?EVENT_TABS_INIT_COMPLETED])),
+    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);})", [ID, Options])),
+
     %% create html markup
     #panel{
 	id = ID,
@@ -43,10 +45,15 @@ tab_link(#tab{url = undefined, id = Id, title = Title}) when is_list(Id) ->
 tab_link(#tab{url=Url, id=Id, title=Title}) ->
     #link{url=Url, title = wf:html_encode(Id), body=Title}.
 
+%% event(Event) ->
+%%     ?PRINT({tabsevent, Event}),
+%%     EventType = wf:q(event),
+%%     ID = wf:q(tabs_id),
+%%     TabIndex = wf:q(index),
+%%     Module = wf:page_module(),
+%%     Module:tabs_event(list_to_atom(EventType), ID, TabIndex).
+
 event(Event) ->
-    ?PRINT({tabsevent, Event}),
-    EventType = wf:q(event),
-    ID = wf:q(tabs_id),
-    TabIndex = wf:q(index),
+    %% ?PRINT({tabsevent, Event}),
     Module = wf:page_module(),
-    Module:tabs_event(list_to_atom(EventType), ID, TabIndex).
+    Module:event(Event).
