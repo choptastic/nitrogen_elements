@@ -30,7 +30,6 @@
 -record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_load, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_url, {?ACTION_BASE(action_tabs_methods), tab, url}).
-%-record(tab_length, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_abort, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
 -record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback}).
