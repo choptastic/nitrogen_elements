@@ -22,8 +22,8 @@ render_element(Record) ->
 	    #list{
 		id = ID,
 	        html_id = wf:temp_id(),
-		%% class = wf:to_list(Record#menu.class),
-		%% style = wf:to_list(Record#menu.style),
+		class = wf:to_list(Record#menu.class),
+		style = wf:to_list(Record#menu.style),
 		body = [#listitem{body = item_link(Item)} || Item <- Record#menu.items]
 	    }
     	]
