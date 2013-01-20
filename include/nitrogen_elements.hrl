@@ -25,14 +25,13 @@
 -record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_enable, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_option, {?ACTION_BASE(action_tabs_methods), key, value}).
--record(tab_add, {?ACTION_BASE(action_tabs_methods), url, label, index}).
+-record(tab_add, {?ACTION_BASE(action_tabs_methods), url, title}).
 -record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_load, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_url, {?ACTION_BASE(action_tabs_methods), tab, url}).
 -record(tab_abort, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
-%% -record(tab_option, {?ACTION_BASE(action_tabs_methods)}, option).
 -record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback}).
 -record(tab_event_off, {?ACTION_BASE(action_tabs_methods), type}).
 

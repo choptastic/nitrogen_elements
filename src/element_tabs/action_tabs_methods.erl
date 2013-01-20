@@ -24,6 +24,9 @@ render_action(#tab_remove{target = Target, tab = Index}) ->
            var panelId = tab.attr(\"aria-controls\");
            $(\"#\" + panelId).remove();
            jQuery(obj('~s')).tabs( \"refresh\");})();", [Target, Index, Target]);
+render_action(#tab_add{target = Target, url = Url, title = Title}) ->
+    wf:f("(function(){$(\"<li><a href='~s'> ~s </a></li>\").appendTo(jQuery(obj(\"~s .ui-tabs-nav\")));
+           jQuery(obj('~s')).tabs( \"refresh\");})();", [Url, Title, Target, Target]);
 render_action(#tab_select{target = Target, tab = Index}) ->
     wf:f("jQuery(obj('~s')).tabs(\"option\", \"active\", ~w);", [Target, Index]);
 render_action(#tab_option{target = Target, key = Key, value = undefined}) ->
