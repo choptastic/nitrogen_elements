@@ -17,8 +17,11 @@
 -record(progressbar_event_off, {?ACTION_BASE(action_progressbar), event}).
 
 %% tabs
--define(EVENT_TABSACTIVATE, 'tabsactivate').
--define(EVENT_TABSCREATE, 'tabscreate').
+-define(EVENT_TABS_ACTIVATE, 'tabsactivate').
+-define(EVENT_TABS_BEFORE_ACTIVATE, 'tabsbeforeactivate').
+-define(EVENT_TABS_BEFORE_LOAD, 'tabsbeforeload').
+-define(EVENT_TABS_CREATE, 'tabscreate').
+-define(EVENT_TABS_LOAD, 'tabsload').
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
 -record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).

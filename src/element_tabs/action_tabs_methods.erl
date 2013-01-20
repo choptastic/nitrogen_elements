@@ -40,14 +40,3 @@ render_action(#tab_event_off{target = Target, type = Type}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->
     #event{type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module}.
-
-%% render_action(#tab_event_on{target = Target, event = Event}) ->
-%%     PickledPostbackInfo = wf_event:serialize_event_context(Event, Target, Target, ?TABS_ELEMENT#tabs.module),
-%%     ?EVENT_LISTENER(?EVENT_TABS_INIT_COMPLETED, wf:f("jQuery(obj('~s')).bind('~s', function(e, ui) {
-%%            Nitrogen.$queue_event('~s','~s',\"event=\" + e.type + \"&tabs_id=\" + '~s' + \"&index=\" + ui.index)})",
-%% 						[Target, Event, Target, PickledPostbackInfo, Target])).
-
-%% generate_postback_script(undefined, _Anchor, _ValidationGroup, _Delegate, _ExtraParam) -> [];
-%% generate_postback_script(Postback, Anchor, ValidationGroup, Delegate, ExtraParam) ->
-%%     PickledPostbackInfo = serialize_event_context(Postback, Anchor, ValidationGroup, Delegate),
-%%     wf:f("Nitrogen.$queue_event('~s', '~s', ~s);", [ValidationGroup, PickledPostbackInfo, ExtraParam]).
