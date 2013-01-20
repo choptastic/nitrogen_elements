@@ -4,7 +4,7 @@
 %% NOTE: set the include path bellow to your nitrogen installation location
 -include_lib("nitrogen_core/include/wf.inc").
 
-%% Elements
+%% Dialog
 -record(dialog, {?ELEMENT_BASE(element_dialog), title = "", body="", width="auto",
 		 height="auto", show_cancel=false, buttons=[]}).
 
@@ -31,10 +31,6 @@
 -record(tab_add, {?ACTION_BASE(action_tabs_methods), url, title}).
 -record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_load, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_url, {?ACTION_BASE(action_tabs_methods), tab, url}).
--record(tab_abort, {?ACTION_BASE(action_tabs_methods)}).
--record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
 -record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback}).
 -record(tab_event_off, {?ACTION_BASE(action_tabs_methods), type}).
 
