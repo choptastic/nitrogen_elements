@@ -22,8 +22,8 @@
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
 -record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
--record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab=-1}).
--record(tab_enable, {?ACTION_BASE(action_tabs_methods), tab=-1}).
+-record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab}).
+-record(tab_enable, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_option, {?ACTION_BASE(action_tabs_methods), key, value}).
 -record(tab_add, {?ACTION_BASE(action_tabs_methods), url, label, index}).
 -record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
@@ -33,7 +33,7 @@
 -record(tab_abort, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_rotate, {?ACTION_BASE(action_tabs_methods), ms, continuing=false}).
 -record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback}).
--record(tab_event_off, {?ACTION_BASE(action_tabs_methods), event}).
+-record(tab_event_off, {?ACTION_BASE(action_tabs_methods), type}).
 
 %% jqgrid
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).

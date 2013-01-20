@@ -9,27 +9,21 @@
 
 -define(TABS_ELEMENT, #tabs{}).
 
-%% define a macro to attach action to event listener to make sure
-%% the event is run only after tabs has been initialized
-%% -define(TAB_EVENT_HOOK(EventName, Target, Func),
-%% 	wf:f("(function(){
-%%                   // if tabs has been initiated
-%%                   if($(obj('~s')).is(':data(tabs)'))
-%%                     ~s
-%%                   // otherwise, add event listener
-%%                   else {
-%%                    function eventHandler(e){ ~s };
-%%                    document.addEventListener('~s', eventHandler, false)}})();",
-%% 	     [Target, Func, Func, EventName])).
+render_action(#tab_destroy{target = Target}) ->
+    wf:f("jQuery(obj('~s')).tabs('destroy');", [Target]);
+render_action(#tab_disable{target = Target, tab = undefined}) ->
+    wf:f("jQuery(obj('~s')).tabs('disable');", [Target]);
+render_action(#tab_disable{target = Target, tab = Index}) when is_integer(Index) ->
+    wf:f("jQuery(obj('~s')).tabs('disable', ~w);", [Target, Index]);
+render_action(#tab_disable{target = Target, tab = Indexes}) when is_list(Indexes) ->
+    %% ?PRINT({hit_tabs_event, disable_some_tabs}),
+    wf:f("jQuery(obj('~s')).tabs(\"option\", \"disabled\", ~w);", [Target, Indexes]);
+render_action(#tab_enable{target = Target}) ->
+    wf:f("jQuery(obj('~s')).tabs('enable');", [Target]);
 
-%% render_action(#tab_destroy{target = Target}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('destroy');", [wf:to_js_id(Target)]));
-%% render_action(#tab_disable{target = Target, tab = Index}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('disable', '~s');",
-%% 							     [wf:to_js_id(Target), Index]));
 %% render_action(#tab_enable{target = Target, tab = Index}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target,	wf:f("jQuery(obj('~s')).tabs('enable', '~s');",
-%% 							     [wf:to_js_id(Target), Index]));
+%%     wf:f("jQuery(obj('~s')).tabs('enable', '~s');", [Target, Index]));
+
 %% render_action(#tab_add{target = Target, url = Url, label = Label}) ->
 %%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('add', '~s', '~s');",
 %% 							     [wf:to_js_id(Target), Url, Label]));
