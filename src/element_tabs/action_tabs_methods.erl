@@ -1,6 +1,5 @@
 % Nitrogen Elements
-% Copyright (c) 2009 Andreas Stenius
-% Contributions from Roman Shestakov (romanshestakov@yahoo.co.uk)
+% Copyright (c) Roman Shestakov (romanshestakov@yahoo.co.uk)
 % See MIT-LICENSE for licensing information.
 
 -module(action_tabs_methods).
@@ -37,16 +36,6 @@ render_action(#tab_option{target = Target}) ->
     PickledPostbackInfo = wf_event:serialize_event_context('option', Target, Target, ?TABS_ELEMENT#tabs.module),
     ExtraParam = wf:f("\"option=\"+jQuery(obj('~s')).tabs(\"option\")", [Target]),
     wf:f("Nitrogen.$queue_event('~s', '~s', ~s);", [Target, PickledPostbackInfo, ExtraParam]);
-
-%% render_action(#tab_load{target = Target, tab = Index}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('load', ~w);", [Target, Index]));
-%% render_action(#tab_url{target = Target, tab = Index, url = Url}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target,	wf:f("jQuery(obj('~s')).tabs('load', ~w, '~s' );", [Target, Index, Url]));
-%% render_action(#tab_abort{target = Target}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('abort');", [Target]));
-%% render_action(#tab_rotate{target = Target, ms = Ms, continuing = IsContinuing}) ->
-%%     ?TAB_EVENT_HOOK(?EVENT_TABS_INIT_COMPLETED, Target, wf:f("jQuery(obj('~s')).tabs('rotate', ~w, ~s);",
-%% 							     [Target, Ms, IsContinuing]));
 render_action(#tab_event_off{target = Target, type = Type}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->
