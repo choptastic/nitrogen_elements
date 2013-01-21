@@ -31,7 +31,7 @@
 -record(tab_add, {?ACTION_BASE(action_tabs_methods), url, title}).
 -record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback}).
+-record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback, extra_param=""}).
 -record(tab_event_off, {?ACTION_BASE(action_tabs_methods), type}).
 
 %% jqgrid
@@ -40,7 +40,12 @@
 -define(ONSELECTROW, onSelectRow).
 
 %% menu
+-define(EVENT_MENU_CREATE, 'menucreate').
+-define(EVENT_MENU_FOCUS, 'menufocus').
+-define(EVENT_MENU_SELECT, 'menuselect').
 -record(menu, {?ELEMENT_BASE(element_menu), items=[], options=[]}).
 -record(item, {id=wf:temp_id(), title="No Title", class="", style="", items=[]}).
+-record(menu_event_on, {?ACTION_BASE(action_menu), type, postback}).
+-record(menu_event_off, {?ACTION_BASE(action_menu), type}).
 
 -endif.
