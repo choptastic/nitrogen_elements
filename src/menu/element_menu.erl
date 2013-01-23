@@ -24,15 +24,15 @@ render_element(Record) ->
 	        html_id = wf:temp_id(),
 		class = wf:to_list(Record#menu.class),
 		style = wf:to_list(Record#menu.style),
-		body = [#listitem{body = item_link(Item)} || Item <- Record#menu.items]
+		body = [#listitem{body = item_link(Item)} || Item <- Record#menu.body]
 	    }
     	]
     }.
 
-item_link(#item{id = Id, title = Title, items = []}) ->
-    #link{url = "#", body = Title};
-item_link(#item{id = Id, title = Title, items = Items}) ->
-    [#link{url = "#", body = Title}, #list{body = [#listitem{body = item_link(Item)} || Item <- Items]}].
+item_link(#item{url = Url, title = Title, body = []}) ->
+    #link{url = Url, body = Title};
+item_link(#item{url = Url, title = Title, body = Items}) ->
+    [#link{url = Url, body = Title}, #list{body = [#listitem{body = item_link(Item)} || Item <- Items]}].
 
 event(Event) ->
     %% ?PRINT({menu_event, Event}),
