@@ -30,7 +30,7 @@ render_action(#tab_select{target = Target, tab = Index}) ->
     wf:f("jQuery(obj('~s')).tabs(\"option\", \"active\", ~w);", [Target, Index]);
 render_action(#tab_option{target = Target, key = undefined, value = undefined}) ->
     ExtraParam = wf:f("(function(){var opt = jQuery(obj('~s')).tabs(\"option\");
-                       return \"options=\" + opt.toSource();})()", [Target]),
+                       return \"options=\" + jQuery.param(opt);})()", [Target]),
     #event{postback = options, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
 render_action(#tab_option{target = Target, key = Key, value = undefined}) ->
     ExtraParam = wf:f("\"~s=\"+jQuery(obj('~s')).tabs(\"option\", \"~w\")", [Key, Target, Key]),
