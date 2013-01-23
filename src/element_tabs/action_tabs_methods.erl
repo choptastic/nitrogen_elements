@@ -28,13 +28,13 @@ render_action(#tab_add{target = Target, url = Url, title = Title}) ->
            jQuery(obj('~s')).tabs( \"refresh\");})();", [Url, Title, Target, Target]);
 render_action(#tab_select{target = Target, tab = Index}) ->
     wf:f("jQuery(obj('~s')).tabs(\"option\", \"active\", ~w);", [Target, Index]);
+render_action(#tab_option{target = Target, key = undefined, value = undefined}) ->
+    ExtraParam = wf:f("(function(){var opt = jQuery(obj('~s')).tabs(\"option\");
+                       return \"options=\" + opt.toSource();})()", [Target]),
+    #event{postback = options, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
 render_action(#tab_option{target = Target, key = Key, value = undefined}) ->
     ExtraParam = wf:f("\"~s=\"+jQuery(obj('~s')).tabs(\"option\", \"~w\")", [Key, Target, Key]),
     #event{postback = {option, Key}, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
-render_action(#tab_option{target = Target}) ->
-    PickledPostbackInfo = wf_event:serialize_event_context('option', Target, Target, ?TABS_ELEMENT#tabs.module),
-    ExtraParam = wf:f("\"option=\"+jQuery(obj('~s')).tabs(\"option\")", [Target]),
-    wf:f("Nitrogen.$queue_event('~s', '~s', ~s);", [Target, PickledPostbackInfo, ExtraParam]);
 render_action(#tab_event_off{target = Target, type = Type}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->
