@@ -1,4 +1,4 @@
--module (layout_element).
+-module (element_layout).
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("nitrogen_elements.hrl").
 -compile(export_all).
@@ -23,21 +23,26 @@ render_element(#layout {
     % Generate Javascript...
     Marker = wf:temp_id(),
     [NorthID, SouthID, EastID, WestID, CenterID] = [wf:temp_id() || _ <- lists:seq(1, 5)],
-    wf:wire(Marker, wf:f("var l = jQuery(obj('me').parentNode).layout({ north: ~s, south: ~s, east:  ~s, west : ~s, center : ~s });
-	document.jquerylayouts.push(l);", [
-	    make_layout_opts(NorthID, NorthOpts),
-	    make_layout_opts(SouthID, SouthOpts),
-	    make_layout_opts(EastID, EastOpts),
-	    make_layout_opts(WestID, WestOpts),
-	    make_layout_opts(CenterID, CenterOpts)
-    ])),
+    wf:wire(Marker, wf:f("$(function(){jQuery(obj('body')).layout();})")),
+    %% wf:wire(Marker, wf:f("jQuery(obj('me').parentNode).layout({ north: ~s, south: ~s, east:  ~s, west : ~s, center : ~s });",
+    %% wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);})", [ID, Options])),
+%% $(document).ready(function () {
+%% 	$('body').layout({ applyDemoStyles: true });
+%% });y
+    %% 	[
+    %% 	    make_layout_opts(NorthID, NorthOpts),
+    %% 	    make_layout_opts(SouthID, SouthOpts),
+    %% 	    make_layout_opts(EastID, EastOpts),
+    %% 	    make_layout_opts(WestID, WestOpts),
+    %% 	    make_layout_opts(CenterID, CenterOpts)
+    %% ])),
     % Output the panels...
     [
-        #panel { show_if=(North /= undefined),  class=[Class, " ", NorthID, " jquerylayout north"], body=North },
-        #panel { show_if=(South /= undefined),  class=[Class, " ", SouthID, " jquerylayout south"], body=South },
-        #panel { show_if=(East /= undefined),   class=[Class, " ", EastID, " jquerylayout east"], body=East },
-        #panel { show_if=(West /= undefined),   class=[Class, " ", WestID, " jquerylayout west"], body=West },
-        #panel { show_if=(Center /= undefined), class=[Class, " ", CenterID, " jquerylayout center"], body=Center },
+        #panel { show_if=(North /= undefined),  class=[Class, " ", NorthID, "ui-layout-north"], body=North },
+        #panel { show_if=(South /= undefined),  class=[Class, " ", SouthID, "ui-layout-south"], body=South },
+        #panel { show_if=(East /= undefined),   class=[Class, " ", EastID, "ui-layout-east"], body=East },
+        #panel { show_if=(West /= undefined),   class=[Class, " ", WestID, "ui-layout-west"], body=West },
+        #panel { show_if=(Center /= undefined), class=[Class, " ", CenterID, "ui-layout-center"], body=Center },
         #span { id=Marker, style="display: none;" }
     ].
 
