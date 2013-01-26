@@ -23,19 +23,15 @@ render_element(#layout {
     % Generate Javascript...
     Marker = wf:temp_id(),
     [NorthID, SouthID, EastID, WestID, CenterID] = [wf:temp_id() || _ <- lists:seq(1, 5)],
-    wf:wire(Marker, wf:f("$(function(){jQuery(obj('body')).layout();})")),
-    %% wf:wire(Marker, wf:f("jQuery(obj('me').parentNode).layout({ north: ~s, south: ~s, east:  ~s, west : ~s, center : ~s });",
-    %% wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);})", [ID, Options])),
-%% $(document).ready(function () {
-%% 	$('body').layout({ applyDemoStyles: true });
-%% });y
-    %% 	[
-    %% 	    make_layout_opts(NorthID, NorthOpts),
-    %% 	    make_layout_opts(SouthID, SouthOpts),
-    %% 	    make_layout_opts(EastID, EastOpts),
-    %% 	    make_layout_opts(WestID, WestOpts),
-    %% 	    make_layout_opts(CenterID, CenterOpts)
-    %% ])),
+    wf:wire(Marker, wf:f("$(function(){jQuery(obj('body')).layout({ north: ~s, south: ~s, east:  ~s, west : ~s, center : ~s });})",
+	[
+	    make_layout_opts(NorthID, NorthOpts),
+	    make_layout_opts(SouthID, SouthOpts),
+	    make_layout_opts(EastID, EastOpts),
+	    make_layout_opts(WestID, WestOpts),
+	    make_layout_opts(CenterID, CenterOpts)
+	])),
+
     % Output the panels...
     [
         #panel { show_if=(North /= undefined),  class=[Class, " ", NorthID, "ui-layout-north"], body=North },
