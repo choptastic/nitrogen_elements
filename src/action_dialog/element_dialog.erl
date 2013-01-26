@@ -64,4 +64,4 @@ event({Id, Event}) ->
     Module = wf:page_module(),
     %% now dismiss dialog and send event to the page
     wf:wire(wf:f("jQuery(obj('~s')).dialog('destroy').remove();", [Id])),
-    Module:dialog_event(Event).
+    Module:event(Event).
