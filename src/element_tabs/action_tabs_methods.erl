@@ -28,13 +28,13 @@ render_action(#tab_add{target = Target, url = Url, title = Title}) ->
            jQuery(obj('~s')).tabs( \"refresh\");})();", [Url, Title, Target, Target]);
 render_action(#tab_select{target = Target, tab = Index}) ->
     wf:f("jQuery(obj('~s')).tabs(\"option\", \"active\", ~w);", [Target, Index]);
-render_action(#tab_option{target = Target, key = undefined, value = undefined}) ->
+render_action(#tab_option{target = Target, key = undefined, value = undefined, postback = Postback}) ->
     ExtraParam = wf:f("(function(){var opt = jQuery(obj('~s')).tabs(\"option\");
                        return \"options=\" + jQuery.param(opt);})()", [Target]),
-    #event{postback = options, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
-render_action(#tab_option{target = Target, key = Key, value = undefined}) ->
+    #event{postback = Postback, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
+render_action(#tab_option{target = Target, key = Key, value = undefined, postback = Postback}) ->
     ExtraParam = wf:f("\"~s=\"+jQuery(obj('~s')).tabs(\"option\", \"~w\")", [Key, Target, Key]),
-    #event{postback = {option, Key}, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
+    #event{postback = Postback, delegate = ?TABS_ELEMENT#tabs.module, extra_param = ExtraParam};
 render_action(#tab_event_off{target = Target, type = Type}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->

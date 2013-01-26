@@ -27,7 +27,7 @@
 -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
 -record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_enable, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_option, {?ACTION_BASE(action_tabs_methods), key, value}).
+-record(tab_option, {?ACTION_BASE(action_tabs_methods), postback, key, value}).
 -record(tab_add, {?ACTION_BASE(action_tabs_methods), url, title}).
 -record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
 -record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
@@ -53,8 +53,10 @@
 %% -define(EVENT_MENU_FOCUS, 'menufocus').
 %% -define(EVENT_MENU_SELECT, 'menuselect').
 -record(menubar, {?ELEMENT_BASE(element_menubar), options=[], body=[]}).
-%% -record(item, {id=wf:temp_id(), title="No Title", url="#", class="", style="", body=[], postback}).
 -record(menubar_event_on, {?ACTION_BASE(action_menubar), type, postback}).
 -record(menubar_event_off, {?ACTION_BASE(action_menubar), type}).
 
+%% layout
+-record (layout, {?ELEMENT_BASE(layout_element), north, south, east, west, center,
+		  north_options=[], south_options=[], east_options=[], west_options=[], center_options=[]}).
 -endif.
