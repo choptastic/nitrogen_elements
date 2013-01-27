@@ -1,6 +1,6 @@
 -module(common).
-%% -export().
--compile(export_all).
+-export([options_to_js/1]).
+%% -compile(export_all).
 
 options_to_js(Options) ->
     wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).
