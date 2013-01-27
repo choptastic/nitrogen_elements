@@ -43,25 +43,5 @@ render_element(#layout {
     ].
 
 make_layout_opts(ID, Opts) ->
-    PreOpts = [
-        {paneSelector, "." ++ ID}
-    ],
-    options_to_js(PreOpts ++ Opts).
-
-%% Options is a list of {Key,Value} tuples
-options_to_js(Options) ->
-    F = fun({Key, Value}) ->
-	if
-	    is_list(Value) ->
-		wf:f("~s: \"~s\"", [Key, wf:js_escape(Value)]);
-	    is_atom(Value) andalso (Value == true orelse Value == false) ->
-		wf:f("~s: ~s", [Key, Value]);
-	    is_atom(Value) ->
-		wf:f("~s: \"~s\"", [Key, Value]);
-	    true ->
-		wf:f("~s: ~p", [Key, Value])
-	end
-    end,
-    Options1 = [F(X) || X <- Options],
-    Options2 = string:join(Options1, ","),
-    wf:f("{ ~s }", [Options2]).
+    PreOpts = [{paneSelector, list_to_binary("." ++ ID)}],
+    common:options_to_js(PreOpts ++ Opts).
