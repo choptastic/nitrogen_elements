@@ -1,4 +1,11 @@
-*.beam
+.DS_Store
+.eunit
+logs
+/ebin/*
 *~
+.#*
 \#*\#
+*.beam
+/deps/*
+/doc/*
 test/logs/*
