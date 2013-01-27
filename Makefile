@@ -8,14 +8,16 @@ APPS				:= $(shell dir apps)
 all: deps compile
 
 compile:
-	./rebar compile
+	rebar compile
 
 deps:
-	./rebar get-deps
+	rebar get-deps
 
 clean:
-	./rebar clean
+	rebar clean
 
 realclean: clean
-	./rebar delete-deps
+	rebar delete-deps
 
+test: all
+	rebar skip_deps=true eunit

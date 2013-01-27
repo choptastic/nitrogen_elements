@@ -18,7 +18,7 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     %% add extra options
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))}|GridOptions]},
     %% init jqGrid control with specified options
-    Options = options_to_js(Record1#jqgrid.options),
+    Options = common:options_to_js(Record1#jqgrid.options),
 
     %% there is a problem with the order of execution of javascript which Nitrogen generates.
     %% e.g. you might have an event that you want to wire during creation of the custom element
@@ -44,32 +44,3 @@ event(EventType) ->
     Module = wf:page_module(),
     Module:jqgrid_event(EventType, RowId, Status).
 
-options_to_js(Options) ->
-    wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).
-
-parse({Key, Value}) when is_list(Value) andalso is_tuple(hd(Value)) ->
-    Opts = string:join([wf:f("{~s}", [X]) || X <- [parse(X) || X <- Value]], ","),
-    wf:f("~s: [ ~s ]", [Key, Opts]);
-parse({Key, Value}) when is_list(Value) andalso is_list(hd(Value)) ->
-    Opts = string:join([wf:f("{~s}", [X]) || X <- [parse(X) || X <- Value]], ","),
-    wf:f("~s: [ ~s ]", [Key, Opts]);
-parse({Key, Value}) when is_list(Value) ->
-    Opts = string:join([parse(X) || X <- Value], ","),
-    wf:f("~s: [ ~s ]", [Key, Opts]);
-parse({Key, Value}) when is_binary(Value) ->
-    wf:f("~s: '~s'", [Key, wf:js_escape(binary_to_list(Value))]);
-parse({Key, Value}) when is_atom(Value) andalso (Value == true orelse Value == false) ->
-    wf:f("~s: ~s", [Key, Value]);
-parse({Key, Value}) when is_atom(Value) ->
-    wf:f("~s: '~s'", [Key, Value]);
-parse({Key, Value}) ->
-    wf:f("~s: ~p", [Key, Value]);
-parse(Value) when is_list(Value) ->
-    Opts = string:join([parse(X) || X <- Value], ", "),
-    wf:f("~s", [Opts]);
-parse(Value) when is_integer(Value) ->
-    wf:f("~p", [Value]);
-parse(Value) when is_atom(Value) ->
-    wf:f("'~s'", [Value]);
-parse(Value) when is_binary(Value) ->
-    wf:f("'~s'", [wf:js_escape(binary_to_list(Value))]).

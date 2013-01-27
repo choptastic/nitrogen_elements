@@ -13,7 +13,7 @@ reflect() -> record_info(fields, tabs).
 render_element(Record) ->
     ID = Record#tabs.id,
     %% init jQuery tabs control with specified options
-    Options = action_jquery_effect:options_to_js(Record#tabs.options),
+    Options = common:options_to_js(Record#tabs.options),
     wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).tabs(~s);})", [ID, Options])),
     %% create html markup
     #panel{
