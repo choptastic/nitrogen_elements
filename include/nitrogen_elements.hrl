@@ -40,6 +40,7 @@
 -define(ONSELECTROW, onSelectRow).
 
 %% menu
+-define(EVENT_MENU_BLUR, 'menublur').
 -define(EVENT_MENU_CREATE, 'menucreate').
 -define(EVENT_MENU_FOCUS, 'menufocus').
 -define(EVENT_MENU_SELECT, 'menuselect').
