@@ -12,11 +12,11 @@ reflect() -> record_info(fields, menu).
 render_element(Record) ->
     ID = Record#menu.id,
 
-    %% %% init jQuery progressbar control with specified options
-    %% Options = action_jquery_effect:options_to_js(Record#menu.options),
-    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).menu();})", [ID])),
+    %% %% init jQuery control with specified options
+    Options = common:options_to_js(Record#menu.options),
+    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).menu(~s);})", [ID, Options])),
 
-    %% %% create html markup
+    %% create html markup
     #panel{
     	body = [
 	    #list{

@@ -14,6 +14,9 @@ parse({Key, Value}) when is_list(Value) andalso is_list(hd(Value)) ->
 parse({Key, Value}) when is_list(Value) ->
     Opts = string:join([parse(X) || X <- Value], ","),
     wf:f("~s: [ ~s ]", [Key, Opts]);
+parse({Key, Value}) when is_tuple(Value) ->
+    Opts = string:join([parse(X) || X <- tuple_to_list(Value)], ","),
+    wf:f("~s: { ~s }", [Key, Opts]);
 parse({Key, Value}) when is_binary(Value) ->
     wf:f("~s: '~s'", [Key, wf:js_escape(binary_to_list(Value))]);
 parse({Key, Value}) when is_atom(Value) andalso (Value == true orelse Value == false) ->

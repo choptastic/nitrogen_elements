@@ -19,8 +19,9 @@ options_to_js_test_() ->
 					])),
      ?_assertEqual("{ paneSelector: '.ID',size: 200,spacing_open: 0,spacing_closed: 0 }",
 		   common:options_to_js([{paneSelector, list_to_binary("." ++ "ID")}] ++
-					    [{size, 200}, {spacing_open, 0}, {spacing_closed, 0}]))
+					    [{size, 200}, {spacing_open, 0}, {spacing_closed, 0}])),
+     ?_assertEqual("{ icons: { submenu: 'ui-icon-circle-triangle-e' } }",
+		   common:options_to_js([{icons, {{submenu, <<"ui-icon-circle-triangle-e">>}}}])),
+     ?_assertEqual("{ position: { my: 'left top',at: 'right-5 top+5' } }",
+		   common:options_to_js([{position, {{my, <<"left top">>}, {at, <<"right-5 top+5">>}}}]))
     ].
-
-
-
