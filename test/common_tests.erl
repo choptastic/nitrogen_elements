@@ -17,8 +17,9 @@ options_to_js_test_() ->
 						     [{name, 'values1'}, {index, 'values1'}, {width, 100}]
 						    ]}
 					])),
-     ?_assertEqual("{ paneSelector: '.ID',size: 200,spacing_open: 0,spacing_closed: 0 }", common:options_to_js([{paneSelector, list_to_binary("." ++ "ID")}] ++
-											       [{size, 200}, {spacing_open, 0}, {spacing_closed, 0}]))
+     ?_assertEqual("{ paneSelector: '.ID',size: 200,spacing_open: 0,spacing_closed: 0 }",
+		   common:options_to_js([{paneSelector, list_to_binary("." ++ "ID")}] ++
+					    [{size, 200}, {spacing_open, 0}, {spacing_closed, 0}]))
     ].
 
 
