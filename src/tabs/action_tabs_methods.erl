@@ -38,5 +38,5 @@ render_action(#tab_option{target = Target, key = Key, value = undefined, postbac
 render_action(#tab_event_off{target = Target, type = Type}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->
-    #event{type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module}.
+    #event{target = Target, type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module}.
     %% #event{type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module, extra_param = "\"index=\" + arguments[1]"}.
