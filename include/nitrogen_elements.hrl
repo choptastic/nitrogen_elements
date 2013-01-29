@@ -46,6 +46,8 @@
 -define(EVENT_MENU_SELECT, 'menuselect').
 -record(menu, {?ELEMENT_BASE(element_menu), options=[], body=[]}).
 -record(item, {id=wf:temp_id(), title="No Title", url="#", class="", style="", body=[], postback}).
+-record(menu_blur, {?ACTION_BASE(action_menu)}).
+-record(menu_option, {?ACTION_BASE(action_menu), postback, key, value}).
 -record(menu_event_on, {?ACTION_BASE(action_menu), type, postback}).
 -record(menu_event_off, {?ACTION_BASE(action_menu), type}).
 
