@@ -16,6 +16,24 @@
 -record(progressbar_event_on, {?ACTION_BASE(action_progressbar), event, postback}).
 -record(progressbar_event_off, {?ACTION_BASE(action_progressbar), event}).
 
+%% accordion
+%% -define(EVENT_TABS_ACTIVATE, 'tabsactivate').
+%% -define(EVENT_TABS_BEFORE_ACTIVATE, 'tabsbeforeactivate').
+%% -define(EVENT_TABS_BEFORE_LOAD, 'tabsbeforeload').
+%% -define(EVENT_TABS_CREATE, 'tabscreate').
+%% -define(EVENT_TABS_LOAD, 'tabsload').
+-record(accordion, {?ELEMENT_BASE(element_accordion), body=[], options=[]}).
+%% -record(panel, {id=wf:temp_id(), title="No Title", class="", style="", body=[]}).
+%% -record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
+%% -record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab}).
+%% -record(tab_enable, {?ACTION_BASE(action_tabs_methods), tab}).
+%% -record(tab_option, {?ACTION_BASE(action_tabs_methods), postback, key, value}).
+%% -record(tab_add, {?ACTION_BASE(action_tabs_methods), url, title}).
+%% -record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
+%% -record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
+-record(accordion_event_on, {?ACTION_BASE(action_accordion), type, postback, extra_param=""}).
+-record(accordion_event_off, {?ACTION_BASE(action_accordion), type}).
+
 %% tabs
 -define(EVENT_TABS_ACTIVATE, 'tabsactivate').
 -define(EVENT_TABS_BEFORE_ACTIVATE, 'tabsbeforeactivate').
