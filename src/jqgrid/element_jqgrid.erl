@@ -38,9 +38,9 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     ]}.
 
 event(EventType) ->
-    %% ?PRINT({jqgrid_event, EventType}),
+    ?PRINT({jqgrid_event, EventType}),
     RowId = wf:q(rowid),
     Status = wf:q(status),
     Module = wf:page_module(),
-    Module:jqgrid_event(EventType, RowId, Status).
+    Module:event(EventType, RowId, Status).
 
