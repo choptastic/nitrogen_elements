@@ -29,9 +29,13 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     %% your *second* event gets fired *before* your first event which builds control is executed.
     %% the only way around this problem I can think of is to use custom events to control the order
     %% of execution.
-    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);var evt = document.createEvent('Event');
-                      evt.initEvent(\"myEvent\", true, true);document.dispatchEvent(evt);})", [ID, Options])),
 
+    %% create grid
+    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);})", [ID, Options])),
+    %% fire html5 custom event
+    wf:wire(wf:f("$(function(){var evt = document.createEvent('Event');
+    			             evt.initEvent('~s', true, true);
+    			             document.dispatchEvent(evt);})", [myEvent])),
     #panel{body = [
 	#table{html_id = TableHtmlID, id = ID, rows = [#tablerow{cells = []}]},
 	#panel{html_id = PagerID}

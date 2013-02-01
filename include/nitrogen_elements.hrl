@@ -47,7 +47,7 @@
 
 %% jqgrid
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
--record(jqgrid_event, {?ACTION_BASE(action_jqgrid), type}).
+-record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type}).
 -define(ONSELECTROW, onSelectRow).
 
 %% menu
