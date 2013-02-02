@@ -32,12 +32,8 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 
     %% create grid
     wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);})", [ID, Options])),
-    %% %% fire html5 custom event
-    %% wf:wire(wf:f("$(function(){var evt = document.createEvent('Event');
-    %% 			             evt.initEvent('~s', true, true);
-    %% 			             document.dispatchEvent(evt);})", [myEvent])),
-
-    wf:wire(ID, wf:f("$(obj('~s')).trigger('custom', ['John'] )", [ID])),
+    %% fire jquery custom event to mark the completion of jsgrid init
+    wf:wire(ID, wf:f("$(obj('~s')).trigger('jqgrid_init')", [ID])),
 
     #panel{body = [
 	#table{html_id = TableHtmlID, id = ID, rows = [#tablerow{cells = []}]},
