@@ -35,20 +35,22 @@
 -define(EVENT_TABS_LOAD, 'tabsload').
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
 -record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
--record(tab_destroy, {?ACTION_BASE(action_tabs_methods)}).
--record(tab_disable, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_enable, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_option, {?ACTION_BASE(action_tabs_methods), postback, key, value}).
--record(tab_add, {?ACTION_BASE(action_tabs_methods), url, title}).
--record(tab_remove, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_select, {?ACTION_BASE(action_tabs_methods), tab}).
--record(tab_event_on, {?ACTION_BASE(action_tabs_methods), type, postback, extra_param=""}).
--record(tab_event_off, {?ACTION_BASE(action_tabs_methods), type}).
+-record(tab_destroy, {?ACTION_BASE(action_tabs)}).
+-record(tab_disable, {?ACTION_BASE(action_tabs), tab}).
+-record(tab_enable, {?ACTION_BASE(action_tabs), tab}).
+-record(tab_option, {?ACTION_BASE(action_tabs), postback, key, value}).
+-record(tab_add, {?ACTION_BASE(action_tabs), url, title}).
+-record(tab_remove, {?ACTION_BASE(action_tabs), tab}).
+-record(tab_select, {?ACTION_BASE(action_tabs), tab}).
+-record(tab_event_on, {?ACTION_BASE(action_tabs), type, postback, extra_param=""}).
+-record(tab_event_off, {?ACTION_BASE(action_tabs), type}).
 
 %% jqgrid
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
--record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type}).
+-record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type, postback}).
 -define(ONSELECTROW, onSelectRow).
+-define(ONCELLSELECT, onCellSelect).
+
 
 %% menu
 -define(EVENT_MENU_BLUR, 'menublur').

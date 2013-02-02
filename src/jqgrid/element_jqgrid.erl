@@ -32,19 +32,37 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 
     %% create grid
     wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);})", [ID, Options])),
-    %% fire html5 custom event
-    wf:wire(wf:f("$(function(){var evt = document.createEvent('Event');
-    			             evt.initEvent('~s', true, true);
-    			             document.dispatchEvent(evt);})", [myEvent])),
+    %% %% fire html5 custom event
+    %% wf:wire(wf:f("$(function(){var evt = document.createEvent('Event');
+    %% 			             evt.initEvent('~s', true, true);
+    %% 			             document.dispatchEvent(evt);})", [myEvent])),
+
+    wf:wire(ID, wf:f("$(obj('~s')).trigger('custom', ['John'] )", [ID])),
+
     #panel{body = [
 	#table{html_id = TableHtmlID, id = ID, rows = [#tablerow{cells = []}]},
 	#panel{html_id = PagerID}
     ]}.
 
-event(EventType) ->
-    ?PRINT({jqgrid_event, EventType}),
-    RowId = wf:q(rowid),
-    Status = wf:q(status),
+%% event(?ONSELECTROW) ->
+%%     ?PRINT({jqgrid_event, ?ONSELECTROW}),
+%%     RowId = wf:q(rowid),
+%%     Status = wf:q(status),
+%%     Module = wf:page_module(),
+%%     Module:event(?ONSELECTROW, RowId, Status);
+%% event(?ONCELLSELECT) ->
+%%     ?PRINT({jqgrid_event, ?ONCELLSELECT}),
+%%     RowId = wf:q(rowid),
+%%     ICol = wf:q(iCol),
+%%     Cellcontent = wf:q(cellcontent),
+%%     Module = wf:page_module(),
+%%     Module:event(?ONCELLSELECT, RowId, ICol, Cellcontent).
+
+event(Event) ->
+    ?PRINT({jqgrid_event_elem, Event}),
+    %% RowId = wf:q(rowid),
+    %% ICol = wf:q(iCol),
+    %% Cellcontent = wf:q(cellcontent),
     Module = wf:page_module(),
-    Module:event(EventType, RowId, Status).
+    Module:event(Event).
 
