@@ -56,4 +56,10 @@ render_action(#jqgrid_event{target = Target, type = ?ONDBLCLICKROW, postback = P
     #event{target = Target, type = 'jqgrid_init', actions =
 	       wf:f("jQuery(obj('~s')).jqGrid('setGridParam', {~s: function(rowid, iRow, iCol, e) {
                Nitrogen.$queue_event('~s', '~s', \"&rowid=\" + rowid + \"&iRow=\" + iRow + \"&iCol=\" + iCol);}})",
-		    [Target, ?ONDBLCLICKROW, Target, PostbackInfo])}.
+		    [Target, ?ONDBLCLICKROW, Target, PostbackInfo])};
+render_action(#jqgrid_event{target = Target, type = ?ONHEADERCLICK, postback = Postback}) ->
+    PostbackInfo = ?EVENT_CTX({?ONHEADERCLICK, Postback}, Target, ?JQGRID_ELEMENT#jqgrid.module),
+    #event{target = Target, type = 'jqgrid_init', actions =
+	       wf:f("jQuery(obj('~s')).jqGrid('setGridParam', {~s: function(gridstate) {
+               Nitrogen.$queue_event('~s', '~s', \"&gridstate=\" + gridstate);}})",
+		    [Target, ?ONHEADERCLICK, Target, PostbackInfo])}.

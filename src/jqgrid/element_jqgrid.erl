@@ -78,5 +78,9 @@ event({?ONDBLCLICKROW, Postback}) ->
     IRow = wf:q(iRow),
     ICol = wf:q(iCol),
     Module = wf:page_module(),
-    Module:jqgrid_event({Postback, {RowId, IRow, ICol}}).
+    Module:jqgrid_event({Postback, {RowId, IRow, ICol}});
+event({?ONHEADERCLICK, Postback}) ->
+    Gridstate = wf:q(gridstate),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {Gridstate}}).
 
