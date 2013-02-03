@@ -34,30 +34,28 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);})", [ID, Options])),
     %% fire jquery custom event to mark the completion of jsgrid init
     wf:wire(ID, wf:f("$(obj('~s')).trigger('jqgrid_init')", [ID])),
-
+    %% output html markup
     #panel{body = [
 	#table{html_id = TableHtmlID, id = ID, rows = [#tablerow{cells = []}]},
 	#panel{html_id = PagerID}
     ]}.
 
 event({?ONSELECTROW, Postback}) ->
-    ?PRINT({jqgrid_event, ?ONSELECTROW}),
+    %% ?PRINT({jqgrid_event, ?ONSELECTROW}),
     RowId = wf:q(rowid),
     Status = wf:q(status),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {RowId, Status}});
 event({?ONCELLSELECT, Postback}) ->
-    ?PRINT({jqgrid_event, ?ONCELLSELECT}),
     RowId = wf:q(rowid),
     ICol = wf:q(iCol),
     Cellcontent = wf:q(cellcontent),
     Module = wf:page_module(),
-    Module:jqgrid_event({Postback, {RowId, ICol, Cellcontent}}).
-%% event(Event) ->
-%%     ?PRINT({jqgrid_event_elem, Event}),
-%%     %% RowId = wf:q(rowid),
-%%     %% ICol = wf:q(iCol),
-%%     %% Cellcontent = wf:q(cellcontent),
-%%     Module = wf:page_module(),
-%%     Module:event(Event).
+    Module:jqgrid_event({Postback, {RowId, ICol, Cellcontent}});
+event({?AFTERINSERTROW, Postback}) ->
+    RowId = wf:q(rowid),
+    Rowdata = wf:q(rowdata),
+    Rowelem = wf:q(rowelem),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {RowId, Rowdata, Rowelem}}).
 

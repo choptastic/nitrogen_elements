@@ -7,19 +7,25 @@
 -compile(export_all).
 
 -define(JQGRID_ELEMENT, #jqgrid{}).
+-define(EVENT_CTX(Event, Target, Delegate), wf_event:serialize_event_context(Event, Target, Target, Delegate)).
 
-render_action(#jqgrid_event{trigger = Trigger, target = Target, type = ?ONSELECTROW, postback = Postback}) ->
-    PickledPostbackInfo = wf_event:serialize_event_context({?ONSELECTROW, Postback},
-							   Target, Target, ?JQGRID_ELEMENT#jqgrid.module),
+render_action(#jqgrid_event{target = Target, type = ?ONSELECTROW, postback = Postback}) ->
+    PostbackInfo = ?EVENT_CTX({?ONSELECTROW, Postback}, Target, ?JQGRID_ELEMENT#jqgrid.module),
     #event{target = Target, type = 'jqgrid_init', actions =
 	       wf:f("jQuery(obj('~s')).jqGrid('setGridParam', {~s: function(rowid, status, e) {
-              Nitrogen.$queue_event('~s', '~s', \"&rowid=\" + rowid + \"&status=\" + status);}})",
-	 [Target, ?ONSELECTROW, Target, PickledPostbackInfo])};
-render_action(#jqgrid_event{trigger = Trigger, target = Target, type = ?ONCELLSELECT, postback = Postback}) ->
-    PickledPostbackInfo = wf_event:serialize_event_context({?ONCELLSELECT, Postback},
-							   Target, Target, ?JQGRID_ELEMENT#jqgrid.module),
+               Nitrogen.$queue_event('~s', '~s', \"&rowid=\" + rowid + \"&status=\" + status);}})",
+		    [Target, ?ONSELECTROW, Target, PostbackInfo])};
+render_action(#jqgrid_event{target = Target, type = ?ONCELLSELECT, postback = Postback}) ->
+    PostbackInfo = ?EVENT_CTX({?ONCELLSELECT, Postback}, Target, ?JQGRID_ELEMENT#jqgrid.module),
     #event{target = Target, type = 'jqgrid_init', actions =
 	       wf:f("jQuery(obj('~s')).jqGrid('setGridParam', {~s: function(rowid, iCol, cellcontent, e) {
                     Nitrogen.$queue_event('~s', '~s', \"&rowid=\" + rowid + \"&iCol=\" + iCol +
-                    \"cellcontent\" + cellcontent);}})",
-		    [Target, ?ONCELLSELECT, Target, PickledPostbackInfo])}.
+                    \"&cellcontent=\" + cellcontent);}})",
+		    [Target, ?ONCELLSELECT, Target, PostbackInfo])};
+render_action(#jqgrid_event{target = Target, type = ?AFTERINSERTROW, postback = Postback}) ->
+    PostbackInfo = ?EVENT_CTX({?AFTERINSERTROW, Postback}, Target, ?JQGRID_ELEMENT#jqgrid.module),
+    #event{target = Target, type = 'jqgrid_init', actions =
+	       wf:f("jQuery(obj('~s')).jqGrid('setGridParam', {~s: function(rowid, rowdata, rowelem) {
+                    Nitrogen.$queue_event('~s', '~s', \"&rowid=\" + rowid + \"&rowdata=\" + jQuery.param(rowdata) +
+                    \"&rowelem=\" + rowelem);}})",
+		    [Target, ?AFTERINSERTROW, Target, PostbackInfo])}.
