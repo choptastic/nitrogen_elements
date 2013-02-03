@@ -57,5 +57,11 @@ event({?AFTERINSERTROW, Postback}) ->
     Rowdata = wf:q(rowdata),
     Rowelem = wf:q(rowelem),
     Module = wf:page_module(),
-    Module:jqgrid_event({Postback, {RowId, Rowdata, Rowelem}}).
+    Module:jqgrid_event({Postback, {RowId, Rowdata, Rowelem}});
+event({?BEFOREPROCESSING, Postback}) ->
+    Data = wf:q(data),
+    Status = wf:q(status),
+    Xhr = wf:q(xhr),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {Data, Status, Xhr}}).
 
