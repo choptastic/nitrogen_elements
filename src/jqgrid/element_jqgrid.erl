@@ -64,12 +64,12 @@ event({?AFTERINSERTROW, Postback}) ->
     Rowelem = wf:q(rowelem),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {RowId, Rowdata, Rowelem}});
-event({?BEFOREPROCESSING, Postback}) ->
-    Data = wf:q(data),
-    Status = wf:q(status),
-    Xhr = wf:q(xhr),
-    Module = wf:page_module(),
-    Module:jqgrid_event({Postback, {Data, Status, Xhr}});
+%% event({?BEFOREPROCESSING, Postback}) ->
+%%     Data = wf:q(data),
+%%     Status = wf:q(status),
+%%     Xhr = wf:q(xhr),
+%%     Module = wf:page_module(),
+%%     Module:jqgrid_event({Postback, {Data, Status, Xhr}});
 event({?BEFOREREQUEST, Postback}) ->
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {}});
@@ -88,4 +88,8 @@ event({?ONRIGHTCLICKROW, Postback}) ->
 event({?ONHEADERCLICK, Postback}) ->
     Gridstate = wf:q(gridstate),
     Module = wf:page_module(),
-    Module:jqgrid_event({Postback, {Gridstate}}).
+    Module:jqgrid_event({Postback, {Gridstate}});
+event(Event) ->
+    ?PRINT({jqgrid_event, Event}),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Event, {}}).
