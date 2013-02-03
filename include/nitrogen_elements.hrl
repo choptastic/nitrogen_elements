@@ -46,10 +46,13 @@
 -record(tab_event_off, {?ACTION_BASE(action_tabs), type}).
 
 %% jqgrid
+-define(BEFORESELECTROW, beforeSelectRow).
 -define(ONSELECTROW, onSelectRow).
 -define(ONCELLSELECT, onCellSelect).
 -define(AFTERINSERTROW, afterInsertRow).
 -define(BEFOREPROCESSING, beforeProcessing).
+-define(BEFOREREQUEST, beforeRequest).
+-define(ONDBLCLICKROW, ondblClickRow).
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type, postback}).
 

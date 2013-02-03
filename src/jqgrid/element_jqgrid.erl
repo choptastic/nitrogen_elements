@@ -40,6 +40,12 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 	#panel{html_id = PagerID}
     ]}.
 
+event({?BEFORESELECTROW, Postback}) ->
+    %% ?PRINT({jqgrid_event, ?BEFORESELECTROW, Postback}),
+    RowId = wf:q(rowid),
+    Event = wf:q(event),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {RowId, Event}});
 event({?ONSELECTROW, Postback}) ->
     %% ?PRINT({jqgrid_event, ?ONSELECTROW}),
     RowId = wf:q(rowid),
@@ -63,5 +69,14 @@ event({?BEFOREPROCESSING, Postback}) ->
     Status = wf:q(status),
     Xhr = wf:q(xhr),
     Module = wf:page_module(),
-    Module:jqgrid_event({Postback, {Data, Status, Xhr}}).
+    Module:jqgrid_event({Postback, {Data, Status, Xhr}});
+event({?BEFOREREQUEST, Postback}) ->
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {}});
+event({?ONDBLCLICKROW, Postback}) ->
+    RowId = wf:q(rowid),
+    IRow = wf:q(iRow),
+    ICol = wf:q(iCol),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {RowId, IRow, ICol}}).
 
