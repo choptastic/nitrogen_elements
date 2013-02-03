@@ -40,25 +40,24 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 	#panel{html_id = PagerID}
     ]}.
 
-%% event(?ONSELECTROW) ->
-%%     ?PRINT({jqgrid_event, ?ONSELECTROW}),
-%%     RowId = wf:q(rowid),
-%%     Status = wf:q(status),
-%%     Module = wf:page_module(),
-%%     Module:event(?ONSELECTROW, RowId, Status);
-%% event(?ONCELLSELECT) ->
-%%     ?PRINT({jqgrid_event, ?ONCELLSELECT}),
-%%     RowId = wf:q(rowid),
-%%     ICol = wf:q(iCol),
-%%     Cellcontent = wf:q(cellcontent),
-%%     Module = wf:page_module(),
-%%     Module:event(?ONCELLSELECT, RowId, ICol, Cellcontent).
-
-event(Event) ->
-    ?PRINT({jqgrid_event_elem, Event}),
-    %% RowId = wf:q(rowid),
-    %% ICol = wf:q(iCol),
-    %% Cellcontent = wf:q(cellcontent),
+event({?ONSELECTROW, Postback}) ->
+    ?PRINT({jqgrid_event, ?ONSELECTROW}),
+    RowId = wf:q(rowid),
+    Status = wf:q(status),
     Module = wf:page_module(),
-    Module:event(Event).
+    Module:jqgrid_event({Postback, {RowId, Status}});
+event({?ONCELLSELECT, Postback}) ->
+    ?PRINT({jqgrid_event, ?ONCELLSELECT}),
+    RowId = wf:q(rowid),
+    ICol = wf:q(iCol),
+    Cellcontent = wf:q(cellcontent),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {RowId, ICol, Cellcontent}}).
+%% event(Event) ->
+%%     ?PRINT({jqgrid_event_elem, Event}),
+%%     %% RowId = wf:q(rowid),
+%%     %% ICol = wf:q(iCol),
+%%     %% Cellcontent = wf:q(cellcontent),
+%%     Module = wf:page_module(),
+%%     Module:event(Event).
 
