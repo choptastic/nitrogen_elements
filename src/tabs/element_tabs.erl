@@ -1,9 +1,16 @@
-% Nitrogen Elements
-% Copyright (c) 2009 Andreas Stenius
-% Contributions from Roman Shestakov (romanshestakov@yahoo.co.uk)
-% See MIT-LICENSE for licensing information.
+%% -*- coding: utf-8 -*-
 
--module (element_tabs).
+%% @copyright 2013 Roman Shestakov
+%% @author Roman Shestakov <romanshestakov@yahoo.co.uk>
+%% See MIT-LICENSE for licensing information.
+
+%% @doc Nitrogen Elements
+%% This is a <em>very</em> useful module. It is ...
+%% @end
+
+-module (tabs.element_tabs).
+
+%% @headerfile "nitrogen_elements.hrl"
 -include ("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").
 -compile(export_all).

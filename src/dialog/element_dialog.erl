@@ -20,7 +20,7 @@
 %%% Description : JQuery UI Dialog
 %%%
 %%%-------------------------------------------------------------------
--module(element_dialog).
+-module(dialog.element_dialog).
 -export([render_element/1, event/1]).
 -include ("nitrogen_elements.hrl").
 

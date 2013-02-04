@@ -2,7 +2,7 @@
 % Copyright (c) Roman Shestakov (romanshestakov@yahoo.co.uk)
 % See MIT-LICENSE for licensing information.
 
--module(action_accordion).
+-module(accordion.action_accordion).
 -include("nitrogen_elements.hrl").
 -compile(export_all).
 

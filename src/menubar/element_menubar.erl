@@ -4,7 +4,7 @@
 
 %% http://stackoverflow.com/questions/12944364/how-to-make-jquery-ui-nav-menu-horizontal
 
--module(element_menubar).
+-module(menubar.element_menubar).
 -include("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").
 -compile(export_all).

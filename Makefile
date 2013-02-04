@@ -21,3 +21,6 @@ realclean: clean
 
 test: all
 	rebar skip_deps=true eunit
+
+doc:
+	rebar doc skip_deps=true
