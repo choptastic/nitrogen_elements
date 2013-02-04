@@ -2,7 +2,7 @@
 % Copyright (c) 2013 Roman Shestakov (romanshestakov@yahoo.co.uk)
 % See MIT-LICENSE for licensing information.
 
--module(progressbar.element_progressbar).
+-module(element_progressbar).
 -include("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").
 -compile(export_all).

@@ -8,7 +8,7 @@
 %% This is a <em>very</em> useful module. It is ...
 %% @end
 
--module (tabs.element_tabs).
+-module(element_tabs).
 
 %% @headerfile "nitrogen_elements.hrl"
 -include ("nitrogen_elements.hrl").

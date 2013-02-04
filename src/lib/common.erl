@@ -1,5 +1,5 @@
 
--module(lib.common).
+-module(common).
 -export([options_to_js/1]).
 %% -compile(export_all).
 

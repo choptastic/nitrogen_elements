@@ -3,7 +3,7 @@
 % Contributions from Roman Shestakov (romanshestakov@yahoo.co.uk)
 % See MIT-LICENSE for licensing information.
 
--module (accordion.element_accordion).
+-module (element_accordion).
 -include ("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").
 -compile(export_all).

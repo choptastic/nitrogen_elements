@@ -2,7 +2,7 @@
 % Copyright (c) Roman Shestakov (romanshestakov@yahoo.co.uk)
 % See MIT-LICENSE for licensing information.
 
--module(menubar.action_menubar).
+-module(action_menubar).
 -include("nitrogen_elements.hrl").
 -compile(export_all).
 

@@ -1,5 +1,5 @@
 
--module (layout.element_layout).
+-module(element_layout).
 -include_lib("nitrogen_core/include/wf.hrl").
 -include("nitrogen_elements.hrl").
 -compile(export_all).
