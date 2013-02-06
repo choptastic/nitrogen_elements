@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 lang="en" xml:lang="en">
 <head>
-<title>Tabs Element</title>
+<title>jQGrid Element</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-02-06 22:43:50 GMT"/>
+<meta name="generated" content="2013-02-06 22:53:09 GMT"/>
 <meta name="author" content="Roman Shestakov (@rshestakov)"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -70,14 +70,14 @@ lang="en" xml:lang="en">
 <body>
 <div id="content">
 
-<h1 class="title">Tabs Element</h1>
+<h1 class="title">jQGrid Element</h1>
 
 
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 Tabs Element - #tabs {} </a>
+<li><a href="#sec-1">1 Tabs Element - #jqgrid {} </a>
 <ul>
 <li><a href="#sec-1.1">1.1 Usage </a></li>
 <li><a href="#sec-1.2">1.2 Attributes </a></li>
@@ -88,12 +88,12 @@ lang="en" xml:lang="en">
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Tabs Element - #tabs {} </h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Tabs Element - #jqgrid {} </h2>
 <div class="outline-text-2" id="text-1">
 
 
 <p>
-The implementation of jQuery tabs element.
+The implementation of jQGrid element.
 </p>
 
 </div>
@@ -107,24 +107,35 @@ The implementation of jQuery tabs element.
 
 
 <pre class="example">
-#tabs{
-    id = tabs,
-    options = [{selected, 0}],
-    tabs = [
-        #tab{title = "Tab 1", url = "/content/tabs2.htm"},
-        #tab{title = "Tab 2", body = ["Tab two body... Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus."]},
-        #tab{title = "Tab 3", body = ["Tab three body... Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum."]}
+#jqgrid{
+    id = jqgrid,
+    options=[
+        {url, 'get_jqgrid_data'},
+        {datatype, &lt;&lt;"json"&gt;&gt;},
+        {colNames, ['ID', 'Name', 'Values']},
+        {colModel, [
+            [{name, 'id'}, {index, 'id'}, {width, 55}],
+            [{name, 'name'}, {index, 'name1'}, {width, 80}],
+            [{name, 'values1'}, {index, 'values1'}, {width, 100}]
+        ]},
+        {rowNum, 10},
+        {rowList, [10, 20, 30]},
+        {sortname, 'id'},
+        {viewrecords, true},
+        {sortorder, &lt;&lt;"desc"&gt;&gt;},
+        {caption, &lt;&lt;"JSON Example"&gt;&gt;}
     ],
-    actions =
-    [
-        #tab_event_on{trigger = tabs, type = ?EVENT_TABS_ACTIVATE, postback = {Tag, {tabs, ?EVENT_TABS_ACTIVATE}}},
-        #tab_event_on{trigger = tabs, type = ?EVENT_TABS_BEFORE_ACTIVATE, postback = {Tag, {tabs, ?EVENT_TABS_BEFORE_ACTIVATE}}},
-        #tab_event_on{trigger = tabs, type = ?EVENT_TABS_BEFORE_LOAD, postback = {Tag, {tabs, ?EVENT_TABS_BEFORE_LOAD}}},
-        #tab_event_on{trigger = tabs, type = ?EVENT_TABS_CREATE, postback = {Tag, {tabs, ?EVENT_TABS_CREATE}}},
-        #tab_event_on{trigger = tabs, type = ?EVENT_TABS_LOAD, postback = {Tag, {tabs, ?EVENT_TABS_LOAD}}}
+    actions = [
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?BEFOREREQUEST, postback = before_rqt},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?BEFORESELECTROW, postback = before_slc_row},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?ONSELECTROW, postback = select_row},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?ONCELLSELECT, postback = select_cell},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?AFTERINSERTROW, postback = after_insert_row},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?ONDBLCLICKROW, postback = on_dblclick},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?ONRIGHTCLICKROW, postback = on_right_click},
+        #jqgrid_event{trigger = jqgrid, target = jqgrid, type = ?ONHEADERCLICK, postback = on_header_click}
     ]
 }
-
 
 </pre>
 
@@ -140,28 +151,6 @@ The implementation of jQuery tabs element.
 <div class="outline-text-3" id="text-1.2">
 
 
-<dl>
-<dt>tabs - (<i>list of #tab{} elements</i>)</dt><dd>
-Set the tabs that will be rendered within this tabs.
-
-</dd>
-<dt>options - (<i>list of tuples</i>)</dt><dd>
-Options which are set during tabs initialization.
-
-</dd>
-<dt>title - (<i>string</i>)</dt><dd>
-Set the tab title.
-
-</dd>
-<dt>body - (<i>string</i>)</dt><dd>
-Set the tab body.
-
-</dd>
-<dt>url - (<i>string</i>)</dt><dd>
-url of the page which will be loaded
-dynamically into the body of the tab element.
-</dd>
-</dl>
 </div>
 </div>
 </div>
@@ -169,7 +158,7 @@ dynamically into the body of the tab element.
 <p class="author"> Author: Roman Shestakov (@rshestakov)
 <a href="mailto:">&lt;&gt;</a>
 </p>
-<p class="date"> Date: 2013-02-06 22:43:50 GMT</p>
+<p class="date"> Date: 2013-02-06 22:53:09 GMT</p>
 <p class="creator">HTML generated by org-mode 6.33x in emacs 23</p>
 </div>
 </div>
