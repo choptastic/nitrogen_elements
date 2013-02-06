@@ -1,0 +1,32 @@
+#+TITLE: Tabs Element
+#+AUTHOR: Roman Shestakov (@rshestakov)
+#+EMAIL:
+
+* Tabs Element - #tabs {}
+
+  The implementation of jQuery tabs element.
+
+** Usage
+
+#+BEGIN_SRC erlang
+      #tabs { id = tabs,
+	   options = [{selected, 0}],
+	   tabs = [
+		   #tab { title="Tab 1", url = "test.html" },
+		   #tab { title="Tab 2", body = "Tab two body ..." },
+                   #tab { title="Tab 3", body = "Tab three body ..." }
+	   ]}
+#+END_SRC
+
+** Attributes
+
+   + tabs - (/list of #tab{} elements/) :: Set the tabs that will be rendered within this tabs.
+
+   + options - (/list of tuples/) :: Options which are set during tabs initialization.
+
+   + title - (/string/) :: Set the tab title.
+
+   + body - (/string/) :: Set the tab body.
+
+   + url - (/string/) :: url of the page which will be loaded
+        dynamically into the body of the tab element.
