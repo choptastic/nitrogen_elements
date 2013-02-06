@@ -81,4 +81,8 @@
 %% layout
 -record (layout, {?ELEMENT_BASE(element_layout), north, south, east, west, center,
 		  north_options=[], south_options=[], east_options=[], west_options=[], center_options=[]}).
+
+%% ajax load action
+-record(ajax_load, {?ACTION_BASE(action_ajax_load), url = ""}).
+
 -endif.
