@@ -33,5 +33,13 @@ e.g.
 5. add nitrogen_elements.hrl to your modules:
     -include_lib("nitrogen_elements/include/nitrogen_elements.hrl").
 
-6. clone Nitrogen_Elements_Example project which shows practical usage examples:
-   https://github.com/RomanShestakov/nitrogen_elements_examples.git
+Examples:
+---------
+
+The best way to get familiar with Nitrogen_Elements is to clone
+Nitrogen_Elements_Example project which shows practical usage :
+
+1. git clone https://github.com/RomanShestakov/nitrogen_elements_examples.git
+2. cd nitrogen_elements_examples;make
+3. ./start.sh
+4. in browser go to locahost:8000
