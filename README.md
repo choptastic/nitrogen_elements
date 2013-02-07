@@ -17,21 +17,39 @@ Implemented Elements:
 * Progressbar
 * Layout
 
+
 Build instructions:
 -------------------
 
-1. clone / build rebar from here: https://github.com/basho/rebar
-2. include nitrogen_elements dependency to your rebar.config
-3. clone the project from https://github.com/RomanShestakov/nitrogen_elements.git
-4. or include "Nitrogen Elements" as dependency for your project in rebar.config
+*  clone / build rebar from here: https://github.com/basho/rebar
+*  include nitrogen_elements dependency to your rebar.config
+*  clone the project from https://github.com/RomanShestakov/nitrogen_elements.git
+*  or include "Nitrogen Elements" as dependency for your project in rebar.config
 
-e.g.
-{deps, [
-    {nitrogen_elements, ".*", {git, "git@github.com:RomanShestakov/nitrogen_elements.git", "HEAD"}}
-]}.
+e.g.:
 
-5. add nitrogen_elements.hrl to your modules:
+  {deps, [
+     {nitrogen_elements, ".*", {git, "git@github.com:RomanShestakov/nitrogen_elements.git", "HEAD"}}
+  ]}.
+
+*  add nitrogen_elements.hrl to your modules:
     -include_lib("nitrogen_elements/include/nitrogen_elements.hrl").
+
+* Please notice that your html template need to include the following references to css and javascript libs:
+
+<link rel='stylesheet' href='plugins/jquery-ui/css/jquery-ui-1.10.0.custom.min.css' type='text/css' media='screen' charset='utf-8'>
+<script src='/plugins/jquery-ui/js/jquery-ui-1.10.0.custom.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='/plugins/history/html4_html5/jquery.history.js' type='text/javascript' charset='utf-8'></script>
+<script src='/plugins/history/history_helper.js' type='text/javascript' charset='utf-8'></script>
+<script src='/plugins/jqgrid/js/i18n/grid.locale-en.js' type='text/javascript'></script>
+<script type="text/javascript">	jQuery.jgrid.no_legacy_api = true; </script>
+<script src='/plugins/jqgrid/js/jquery.jqGrid.min.js' type='text/javascript'></script>
+<script src='/plugins/layout/js/jquery.layout-latest.min.js' type='text/javascript'></script>
+<script src='/plugins/menubar/jquery.ui.menubar.js' type='text/javascript' charset='utf-8'></script>
+
+see for example priv/templates/onecolumn.html from
+Nitrogen_Elements_Example project.
+
 
 Examples:
 ---------
