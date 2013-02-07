@@ -28,15 +28,20 @@ Build instructions:
 
 e.g.:
 
+```erlang
   {deps, [
      {nitrogen_elements, ".*", {git, "git@github.com:RomanShestakov/nitrogen_elements.git", "HEAD"}}
   ]}.
+```
 
 *  add nitrogen_elements.hrl to your modules:
+```erlang
     -include_lib("nitrogen_elements/include/nitrogen_elements.hrl").
+```
 
 * Please notice that your html template need to include the following references to css and javascript libs:
 
+```javascript
 <link rel='stylesheet' href='plugins/jquery-ui/css/jquery-ui-1.10.0.custom.min.css' type='text/css' media='screen' charset='utf-8'>
 <script src='/plugins/jquery-ui/js/jquery-ui-1.10.0.custom.min.js' type='text/javascript' charset='utf-8'></script>
 <script src='/plugins/history/html4_html5/jquery.history.js' type='text/javascript' charset='utf-8'></script>
@@ -46,10 +51,10 @@ e.g.:
 <script src='/plugins/jqgrid/js/jquery.jqGrid.min.js' type='text/javascript'></script>
 <script src='/plugins/layout/js/jquery.layout-latest.min.js' type='text/javascript'></script>
 <script src='/plugins/menubar/jquery.ui.menubar.js' type='text/javascript' charset='utf-8'></script>
+```
 
 see for example priv/templates/onecolumn.html from
 Nitrogen_Elements_Example project.
-
 
 Examples:
 ---------
