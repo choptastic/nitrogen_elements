@@ -1,6 +1,6 @@
 {application,nitrogen_elements,
              [{description,[]},
-              {vsn,"1"},
+              {vsn,"0.2.1"},
               {registered,[]},
               {applications,[kernel,stdlib]},
               {modules,[action_dialog,action_tabs_methods,element_flot_chart,
