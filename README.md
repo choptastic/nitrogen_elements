@@ -1,5 +1,5 @@
-Nitrogen Elements
-=================
+Nitrogen Elements - v.0.2
+=========================
 
 Nitrogen Elements is a collection of useful Web UI controls and
 supposed to be used as an extention to Nitrogen Web Framework.
