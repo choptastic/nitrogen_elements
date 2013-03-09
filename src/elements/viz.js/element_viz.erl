@@ -4,10 +4,6 @@
 %% @author Roman Shestakov <romanshestakov@yahoo.co.uk>
 %% See MIT-LICENSE for licensing information.
 
-%% @doc Nitrogen Elements
-%% This is a <em>very</em> useful module. It is ...
-%% @end
-
 -module(element_viz).
 
 -include ("nitrogen_elements.hrl").
@@ -24,6 +20,9 @@ render_element(Record) ->
 
     %% generate graph html and append to panel placeholder
     wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).html(Viz('~s', \"svg\"));})", [ID, Data])),
+
+    %% set svg width 100% to fill panel
+    wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).find(\"svg\").width('100%');})", [ID])),
 
     %% add jquery.graphviz
     wf:wire(ID, wf:f("$(function(){jQuery(obj('~s')).find(\"svg\").graphviz({status: true});})", [ID])),
