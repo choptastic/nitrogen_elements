@@ -83,9 +83,16 @@
 		  north_options=[], south_options=[], east_options=[], west_options=[], center_options=[]}).
 
 %% viz.js
--record (viz, {?ELEMENT_BASE(element_viz), data}).
+-record(viz, {?ELEMENT_BASE(element_viz), data}).
+-record(viz_display, {?ACTION_BASE(action_viz)}).
 
 %% ajax load action
 -record(ajax_load, {?ACTION_BASE(action_ajax_load), url = ""}).
+
+%% websocket api
+-record(ws_open, {?ACTION_BASE(action_ws_api), server = "", func = ""}).
+-record(ws_message, {?ACTION_BASE(action_ws_api), func = ""}).
+-record(ws_error, {?ACTION_BASE(action_ws_api), func = ""}).
+-record(ws_close, {?ACTION_BASE(action_ws_api), func = ""}).
 
 -endif.
