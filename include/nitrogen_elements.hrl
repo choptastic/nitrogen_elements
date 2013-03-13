@@ -84,7 +84,6 @@
 
 %% viz.js
 -record(viz, {?ELEMENT_BASE(element_viz), data}).
--record(viz_display, {?ACTION_BASE(action_viz)}).
 
 %% ajax load action
 -record(ajax_load, {?ACTION_BASE(action_ajax_load), url = ""}).
