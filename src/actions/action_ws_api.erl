@@ -14,12 +14,9 @@ render_action(#ws_open{server = Server, func = OnOpen}) ->
            on_open_script(OnOpen),
            ";})"
     ];
-render_action(#ws_message{func = OnMessage}) ->
-      on_message_script(OnMessage);
-render_action(#ws_error{func = OnError}) ->
-      on_error_script(OnError);
-render_action(#ws_close{func = OnClose}) ->
-      on_close_script(OnClose).
+render_action(#ws_message{func = OnMessage}) -> on_message_script(OnMessage);
+render_action(#ws_error{func = OnError}) -> on_error_script(OnError);
+render_action(#ws_close{func = OnClose}) -> on_close_script(OnClose).
 
 on_open_script("") ->
     "websocket.onopen = function(event){console.log('close');};";
