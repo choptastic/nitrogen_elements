@@ -31,6 +31,8 @@ parse(Value) when is_list(Value) ->
     wf:f("~s", [Opts]);
 parse(Value) when is_integer(Value) ->
     wf:f("~p", [Value]);
+parse(Value) when is_atom(Value) andalso (Value == true orelse Value == false) ->
+    wf:f("~s", [Value]);
 parse(Value) when is_atom(Value) ->
     wf:f("'~s'", [Value]);
 parse(Value) when is_binary(Value) ->

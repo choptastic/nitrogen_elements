@@ -22,6 +22,12 @@ options_to_js_test_() ->
 					    [{size, 200}, {spacing_open, 0}, {spacing_closed, 0}])),
      ?_assertEqual("{ icons: { submenu: 'ui-icon-circle-triangle-e' } }",
 		   common:options_to_js([{icons, {{submenu, <<"ui-icon-circle-triangle-e">>}}}])),
+     ?_assertEqual("{ icons: { submenu: 'ui-icon-circle-triangle-e',submenu1: 'ui-icon-circle-triangle-r' } }",
+		   common:options_to_js([{icons, {{submenu, <<"ui-icon-circle-triangle-e">>}, {submenu1, <<"ui-icon-circle-triangle-r">>}}}])),
+     ?_assertEqual("{ group: { grouping: true,group2: { grouping2: false,grouping3: true } } }",
+     		   common:options_to_js([{group, {{grouping, 'true'}, {group2, {{grouping2, 'false'}, {grouping3, 'true'}}}}}])),
+     ?_assertEqual("{ group: { grouping: true,groupingView: { groupField: [ 'name' ],groupColumn: [ false ] } } }",
+     		   common:options_to_js([{group, {{grouping, true}, {groupingView, {{groupField, ['name']}, {groupColumn, [false]}}}}}])),
      ?_assertEqual("{ position: { my: 'left top',at: 'right-5 top+5' } }",
 		   common:options_to_js([{position, {{my, <<"left top">>}, {at, <<"right-5 top+5">>}}}]))
     ].
