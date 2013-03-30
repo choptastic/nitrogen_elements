@@ -55,6 +55,7 @@
 -define(ONDBLCLICKROW, "jqGridDblClickRow").
 -define(ONHEADERCLICK, "qGridHeaderClick").
 -define(ONRIGHTCLICKROW, "jqGridRightClickRow").
+-define(ONLOADCOMPLETE, "jqGridLoadComplete").
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type, postback}).
 

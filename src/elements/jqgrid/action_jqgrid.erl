@@ -40,6 +40,9 @@ render_action(#jqgrid_event{target = Target, type = ?ONDBLCLICKROW, postback = P
 render_action(#jqgrid_event{target = Target, type = ?ONHEADERCLICK, postback = Postback}) ->
     #event{target = Target, type = ?ONHEADERCLICK, postback = {?ONHEADERCLICK, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&gridstate=\" + arguments[1]"};
+render_action(#jqgrid_event{target = Target, type = ?ONLOADCOMPLETE, postback = Postback}) ->
+    #event{target = Target, type = ?ONLOADCOMPLETE, postback = {?ONLOADCOMPLETE, Postback},
+	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + arguments[1]"};
 render_action(#jqgrid_event{target = Target, type = ?ONRIGHTCLICKROW, postback = Postback}) ->
     #event{target = Target, type = ?ONRIGHTCLICKROW, postback = {?ONRIGHTCLICKROW, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +

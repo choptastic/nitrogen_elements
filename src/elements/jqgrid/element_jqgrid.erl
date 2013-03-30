@@ -71,6 +71,10 @@ event({?ONHEADERCLICK, Postback}) ->
     Gridstate = wf:q(gridstate),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {Gridstate}});
+event({?ONLOADCOMPLETE, Postback}) ->
+    Data = wf:q(data),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {Data}});
 event(Event) ->
     ?PRINT({jqgrid_event, Event}),
     Module = wf:page_module(),
