@@ -44,6 +44,8 @@
 -record(tab_select, {?ACTION_BASE(action_tabs), tab}).
 -record(tab_event_on, {?ACTION_BASE(action_tabs), type, postback, extra_param=""}).
 -record(tab_event_off, {?ACTION_BASE(action_tabs), type}).
+-record(tab_cache, {?ACTION_BASE(action_tabs)}).
+
 
 %% jqgrid
 -define(BEFORESELECTROW, "jqGridBeforeSelectRow").

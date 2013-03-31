@@ -38,5 +38,9 @@ render_action(#tab_option{target = Target, key = Key, value = undefined, postbac
 render_action(#tab_event_off{target = Target, type = Type}) ->
     wf:f("jQuery(obj('~s')).unbind('~s');", [Target, Type]);
 render_action(#tab_event_on{target = Target, type = Type, postback = Postback}) ->
-    #event{target = Target, type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module}.
-    %% #event{type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module, extra_param = "\"index=\" + arguments[1]"}.
+    #event{target = Target, type = Type, postback = Postback, delegate = ?TABS_ELEMENT#tabs.module};
+%% enable caching for ajax tabs - http://jqueryui.com/upgrade-guide/1.9/#deprecated-ajaxoptions-and-cache-options-added-beforeload-event
+render_action(#tab_cache{target = Target}) ->
+    wf:f("jQuery(obj('~s')).tabs({beforeLoad: function(event, ui){
+                if(ui.tab.data(\"loaded\") ) {event.preventDefault();return;}
+                ui.jqXHR.success(function() {ui.tab.data( \"loaded\", true);});}})", [Target]).
