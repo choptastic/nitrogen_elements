@@ -41,11 +41,11 @@ render_element(Record) ->
     }.
 
 tab_link(#tab{url=undefined, id=Id, title=Title}) when is_atom(Id) ->
-    #link{url="#" ++ wf:html_encode(atom_to_list(Id)), body=Title};
+    #link{url="#" ++ wf:html_encode(atom_to_list(Id)), body=[#span{text=Title}]};
 tab_link(#tab{url=undefined, id=Id, title=Title}) when is_list(Id) ->
-    #link{url="#" ++ wf:html_encode(Id), body=Title};
+    #link{url="#" ++ wf:html_encode(Id), body=[#span{text=Title}]};
 tab_link(#tab{url=Url, id=Id, title=Title}) ->
-    #link{url=Url, title=wf:html_encode(Id), body=Title}.
+    #link{url=Url, title=wf:html_encode(Id), body=[#span{text=Title}]}.
 
 event(Event) ->
     %% ?PRINT({tabsevent, Event}),
