@@ -51,6 +51,7 @@
 	    this._super( "_processTabs" );
 	    var self = this;
 	    var lis = this.tablist.children( ":has(a[href])" );
+	    lis.children("a").css('outline', 'none');
 
 	    if (this.options.closable === true) {
 		var unclosable_lis = lis.filter(function() {
@@ -61,6 +62,7 @@
 		unclosable_lis.each(function() {
                     $(this)
 			.append('<a href="#"><span class="ui-icon ui-icon-circle-close ui-closable-tab"></span></a>')
+			.css('outline', 'none')
 			.find('a:last .ui-closable-tab')
                         .hover(
                             function() {
