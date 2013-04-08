@@ -64,12 +64,12 @@
 			.find('a:last .ui-closable-tab')
                         .hover(
                             function() {
-				$(this).addClass('ui-state-hover');
+				$(this).addClass('ui-icon-circle-triangle-e');
                                 $(this).css('cursor', 'pointer');
                             },
                             function() {
                                 $(this).css('cursor', 'default');
-				$(this).removeClass('ui-state-hover');
+				$(this).removeClass('ui-icon-circle-triangle-e');
                             }
                         )
                         .click(function() {
