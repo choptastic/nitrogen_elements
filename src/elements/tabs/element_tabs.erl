@@ -40,12 +40,18 @@ render_element(Record) ->
 	]
     }.
 
-tab_link(#tab{url=undefined, id=Id, title=Title}) when is_atom(Id) ->
-    #link{url="#" ++ wf:html_encode(atom_to_list(Id)), body=[#span{text=Title}]};
-tab_link(#tab{url=undefined, id=Id, title=Title}) when is_list(Id) ->
-    #link{url="#" ++ wf:html_encode(Id), body=[#span{text=Title}]};
-tab_link(#tab{url=Url, id=Id, title=Title}) ->
-    #link{url=Url, title=wf:html_encode(Id), body=[#span{text=Title}]}.
+tab_link(#tab{url=undefined, id=Id, title=Title, class=Class, closable=undefined}) when is_atom(Id) ->
+    #link{url="#" ++ wf:html_encode(atom_to_list(Id)), class=Class, body=[#span{text=Title}]};
+tab_link(#tab{url=undefined, id=Id, title=Title, class=Class, closable=undefined}) when is_list(Id) ->
+    #link{url="#" ++ wf:html_encode(Id), class=Class, body=[#span{text=Title}]};
+tab_link(#tab{url=Url, id=Id, title=Title, class=Class, closable=undefined}) ->
+    #link{url=Url, title=wf:html_encode(Id), class=Class, body=[#span{text=Title}]};
+tab_link(#tab{closable=IsClosable, class=Class} = Tab) ->
+    Class1 = case IsClosable of
+	true -> Class;
+	false -> Class ++ ".ui-unclosable-tab"
+    end,
+    tab_link(Tab#tab{class=Class1, closable=undefined}).
 
 event(Event) ->
     %% ?PRINT({tabsevent, Event}),

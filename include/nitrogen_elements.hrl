@@ -34,7 +34,7 @@
 -define(EVENT_TABS_CREATE, 'tabscreate').
 -define(EVENT_TABS_LOAD, 'tabsload').
 -record(tabs, {?ELEMENT_BASE(element_tabs), tabs=[], options=[], tag}).
--record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], tag, url}).
+-record(tab, {id=wf:temp_id(), title="No Title", class="", style="", body=[], closable=true, tag, url}).
 -record(tab_destroy, {?ACTION_BASE(action_tabs)}).
 -record(tab_disable, {?ACTION_BASE(action_tabs), tab}).
 -record(tab_enable, {?ACTION_BASE(action_tabs), tab}).
