@@ -10,7 +10,6 @@
 %% http://www.trirand.com/jqgridwiki/doku.php?id=wiki:events
 
 -define(JQGRID_ELEMENT, #jqgrid{}).
--define(EVENT_CTX(Event, Target, Delegate), wf_event:serialize_event_context(Event, Target, Target, Delegate)).
 
 render_action(#jqgrid_event{target = Target, type = ?BEFORESELECTROW, postback = Postback}) ->
     #event{target = Target, type = ?BEFORESELECTROW, postback = {?BEFORESELECTROW, Postback},
@@ -28,11 +27,8 @@ render_action(#jqgrid_event{target = Target, type = ?AFTERINSERTROW, postback = 
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +
                \"&rowdata=\" + arguments[2] + \"&rowelem=\" + arguments[3]"};
 render_action(#jqgrid_event{target = Target, type = ?BEFOREREQUEST, postback = Postback}) ->
-    PostbackInfo = ?EVENT_CTX({?BEFOREREQUEST, Postback}, Target, ?JQGRID_ELEMENT#jqgrid.module),
-    #event{target = Target, type = 'jqgrid_init', actions =
-	       wf:f("jQuery(obj('~s')).jqGrid('setGridParam', {~s: function() {
-                    Nitrogen.$queue_event('~s', '~s');}})",
-		    [Target, ?BEFOREREQUEST, Target, PostbackInfo])};
+    #event{target = Target, type = ?BEFOREREQUEST, postback = {?BEFOREREQUEST, Postback},
+	   delegate = ?JQGRID_ELEMENT#jqgrid.module};
 render_action(#jqgrid_event{target = Target, type = ?ONDBLCLICKROW, postback = Postback}) ->
     #event{target = Target, type = ?ONDBLCLICKROW, postback = {?ONDBLCLICKROW, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +
