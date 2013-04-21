@@ -38,12 +38,12 @@ render_action(#jqgrid_event{target = Target, type = ?ONHEADERCLICK, postback = P
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&gridstate=\" + arguments[1]"};
 render_action(#jqgrid_event{target = Target, type = ?ONLOADCOMPLETE, postback = Postback}) ->
     #event{target = Target, type = ?ONLOADCOMPLETE, postback = {?ONLOADCOMPLETE, Postback},
-	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + arguments[1]"};
+	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + JSON.stringify(arguments[1])"};
 render_action(#jqgrid_event{target = Target, type = ?ONRIGHTCLICKROW, postback = Postback}) ->
     #event{target = Target, type = ?ONRIGHTCLICKROW, postback = {?ONRIGHTCLICKROW, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +
-               \"&iRow=\" + arguments[2] + \"&iCol=\" + arguments[3]"};
-render_action(#jqgrid_event{target = Target, type = ?BEFOREPROCESSING, postback = Postback}) ->
-    #event{target = Target, type = ?BEFOREPROCESSING, postback = {?BEFOREPROCESSING, Postback},
-	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + arguments[1] + \"&status=\" + arguments[2] +
-	\"&xhr=\" + arguments[3]"}.
+               \"&iRow=\" + arguments[2] + \"&iCol=\" + arguments[3]"}.
+%% render_action(#jqgrid_event{target = Target, type = ?BEFOREPROCESSING, postback = Postback}) ->
+%%     #event{target = Target, type = ?BEFOREPROCESSING, postback = {?BEFOREPROCESSING, Postback},
+%% 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + arguments[1] + \"&status=\" + arguments[2] +
+%% 	\"&xhr=\" + arguments[3]"}.
