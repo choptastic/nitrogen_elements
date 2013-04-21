@@ -75,6 +75,11 @@ event({?ONLOADCOMPLETE, Postback}) ->
     Data = wf:q(data),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {Data}});
+event({?BEFOREPROCESSING, Postback}) ->
+    Data = wf:q(data),
+    Status = wf:q(status),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {Data, Status}});
 event(Event) ->
     ?PRINT({jqgrid_event, Event}),
     Module = wf:page_module(),

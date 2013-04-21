@@ -52,7 +52,7 @@
 -define(ONSELECTROW, "jqGridSelectRow").
 -define(ONCELLSELECT, "jqGridCellSelect").
 -define(AFTERINSERTROW, "afterInsertRow").
-%% -define(BEFOREPROCESSING, beforeProcessing).
+-define(BEFOREPROCESSING, "beforeProcessing").
 -define(BEFOREREQUEST, "jqGridBeforeRequest").
 -define(ONDBLCLICKROW, "jqGridDblClickRow").
 -define(ONHEADERCLICK, "qGridHeaderClick").
