@@ -39,6 +39,11 @@ render_action(#jqgrid_event{target = Target, type = ?ONHEADERCLICK, postback = P
 render_action(#jqgrid_event{target = Target, type = ?ONLOADCOMPLETE, postback = Postback}) ->
     #event{target = Target, type = ?ONLOADCOMPLETE, postback = {?ONLOADCOMPLETE, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + JSON.stringify(arguments[1])"};
+render_action(#jqgrid_event{target = Target, type = ?ONPAGESIZECHANGE, postback = Postback}) ->
+    %% this is custom event to simplify getting details of the currect page size
+    #event{target = Target, type = ?ONLOADCOMPLETE, postback = {?ONPAGESIZECHANGE, Postback},
+	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&page=\" + arguments[1].page + \"&total=\" +
+	arguments[1].total +\"&records=\" + arguments[1].records"};
 render_action(#jqgrid_event{target = Target, type = ?ONRIGHTCLICKROW, postback = Postback}) ->
     #event{target = Target, type = ?ONRIGHTCLICKROW, postback = {?ONRIGHTCLICKROW, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +
