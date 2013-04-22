@@ -96,5 +96,6 @@
 -record(ws_message, {?ACTION_BASE(action_ws_api), func = ""}).
 -record(ws_error, {?ACTION_BASE(action_ws_api), func = ""}).
 -record(ws_close, {?ACTION_BASE(action_ws_api), func = ""}).
+-record(ws_send, {?ACTION_BASE(action_ws_api), text = ""}).
 
 -endif.
