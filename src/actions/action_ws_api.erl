@@ -20,17 +20,16 @@ render_action(#ws_open{server = Server, func = OnOpen}) ->
 render_action(#ws_message{func = OnMessage}) -> on_message_script(OnMessage);
 render_action(#ws_error{func = OnError}) -> on_error_script(OnError);
 render_action(#ws_close{func = OnClose}) -> on_close_script(OnClose);
-render_action(#ws_send{text = Message}) -> on_send_script(Message).
+render_action(#ws_send{func = Message}) -> on_send_script(Message).
 
 on_send_script(Message) ->
     wf:f("$(function() { switch(window.websocket.readyState) {
                             case window.websocket.OPEN:
-                                window.websocket.send(\"~s\");
+	                        window.websocket.send(~s);
                                 break;
                             case window.websocket.CONNECTING:
-                                //console.log('connection...');
-                                setTimeout(function() {
-                                    window.websocket.send(\"~s\"); }, 500);
+                                console.log('connection...');
+                                setTimeout(function() { window.websocket.send(~s)}, 500);
                                 break;
                             default:
                                 break;
