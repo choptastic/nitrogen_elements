@@ -21,8 +21,14 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     %% init jqGrid control with specified options
     Options = common:options_to_js(Record1#jqgrid.options),
     FilterOptions = common:options_to_js(Record1#jqgrid.filter_options),
+    
     %% create grid
-    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  $('~s').jqGrid('filterToolbar', ~s); })", [ID, Options,ID,FilterOptions])),
+    case Record1#jqgrid.filter_toolbar of
+        true ->
+            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  $('~s').jqGrid('filterToolbar', ~s); })", [ID, Options,ID,FilterOptions]));
+        _ -> 
+            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  })", [ID, Options]))
+    end,
 
     %% output html markup
     #panel{body = [
