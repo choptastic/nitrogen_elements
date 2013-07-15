@@ -60,7 +60,7 @@
 -define(ONLOADCOMPLETE, "jqGridLoadComplete").
 %% not standard event to figure out the size of the page
 -define(ONPAGESIZECHANGE, "onpagesizechange").
--record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[]}).
+-record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[],filter_options=[]}).
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type, postback}).
 
 %% menu

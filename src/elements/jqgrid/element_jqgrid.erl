@@ -17,12 +17,12 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
 
     %% add extra options
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))} | GridOptions]},
-
+   
     %% init jqGrid control with specified options
     Options = common:options_to_js(Record1#jqgrid.options),
-
+    FilterOptions = common:options_to_js(Record1#jqgrid.filter_options),
     %% create grid
-    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);})", [ID, Options])),
+    wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  $('~s').jqGrid('filterToolbar', ~s); })", [ID, Options,ID,FilterOptions])),
 
     %% output html markup
     #panel{body = [
