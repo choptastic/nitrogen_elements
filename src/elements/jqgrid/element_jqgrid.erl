@@ -6,6 +6,8 @@
 -include ("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").
 -compile(export_all).
+-compile([{parse_transform, lager_transform}]).
+
 
 reflect() -> record_info(fields, jqgrid).
 
@@ -19,17 +21,18 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))} | GridOptions]},
    
     %% init jqGrid control with specified options
+        
     Options = common:options_to_js(Record1#jqgrid.options),
     FilterOptions = common:options_to_js(Record1#jqgrid.filter_options),
-    
+    io:format("Options:~p~n",[Options]),
     %% create grid
     case Record1#jqgrid.filter_toolbar of
         true ->
-            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  $('~s').jqGrid('filterToolbar', ~s); })", [ID, Options,ID,FilterOptions]));
+            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  $('~s').jqGrid('filterToolbar', ~s);})", [ID, Options,ID,FilterOptions]));
         _ -> 
             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  })", [ID, Options]))
     end,
-
+    
     %% output html markup
     #panel{body = [
 	#table{html_id = TableHtmlID, id = ID, rows = [#tablerow{cells = []}]},
@@ -65,6 +68,9 @@ event({?ONDBLCLICKROW, Postback}) ->
     RowId = wf:q(rowid),
     IRow = wf:q(iRow),
     ICol = wf:q(iCol),
+    lager:debug("wf:q(rowid):~p",[wf:q(rowid)]),
+    lager:debug("wf:q(iRow):~p",[wf:q(iRow)]),
+    lager:debug("wf:q(iCol):~p",[wf:q(iCol)]),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {RowId, IRow, ICol}});
 event({?ONRIGHTCLICKROW, Postback}) ->

@@ -6,6 +6,10 @@
 options_to_js(Options) ->
     wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).
 
+parse({Key,Value}) when Key==formatoptions orelse Key ==editoptions ->
+    Js = options_to_js(Value),    
+    wf:f("~s: ~s ", [Key, Js]);
+
 parse({Key, Value}) when is_list(Value) andalso is_tuple(hd(Value)) ->
     Opts = string:join([wf:f("{~s}", [X]) || X <- [parse(X) || X <- Value]], ","),
     wf:f("~s: [ ~s ]", [Key, Opts]);
