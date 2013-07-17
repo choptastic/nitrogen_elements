@@ -24,7 +24,9 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
         
     Options = common:options_to_js(Record1#jqgrid.options),
     FilterOptions = common:options_to_js(Record1#jqgrid.filter_options),
-    io:format("Options:~p~n",[Options]),
+%%     io:format("Options:~p~n",[Options]),
+    io:format("FilterOptionsBEFORE JSONIFYING:~n~p~n",[Record1#jqgrid.filter_options]),
+    io:format("FilterOptions:~p~n",[FilterOptions]),
     %% create grid
     case Record1#jqgrid.filter_toolbar of
         true ->
