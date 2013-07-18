@@ -21,12 +21,11 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     Record1 = Record#jqgrid{options = [{pager, list_to_binary(wf:f('#~s', [PagerID]))} | GridOptions]},
    
     %% init jqGrid control with specified options
-        
+%%      io:format("Record1#jqgrid.options:~p~n",[Record1#jqgrid.options]),    
     Options = common:options_to_js(Record1#jqgrid.options),
     FilterOptions = common:options_to_js(Record1#jqgrid.filter_options),
 %%     io:format("Options:~p~n",[Options]),
-    io:format("FilterOptionsBEFORE JSONIFYING:~n~p~n",[Record1#jqgrid.filter_options]),
-    io:format("FilterOptions:~p~n",[FilterOptions]),
+%%         io:format("FilterOptions:~p~n",[FilterOptions]),
     %% create grid
     case Record1#jqgrid.filter_toolbar of
         true ->
