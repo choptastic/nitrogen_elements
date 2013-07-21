@@ -13,9 +13,15 @@ parse({Key,Value}) when Key==formatoptions orelse Key ==editoptions ->
 parse({Key,{function,Value}}) ->
   
  Js = wf:f("~s: ~p", [Key, Value]),
- 
+ io:format("Js0:~p~n",[Value]),
  Js2 =re:replace(Js, "\"", "", [global, {return,list}]),
- re:replace(Js2, "\%", "\"", [global, {return,list}]);
+ io:format("Js2:~p~n",[Js2]),
+ Test=re:replace(Js2, "#", "\\\\", [global, {return,list}]),
+ Test2=re:replace(Test, "\%", "\"", [global, {return,list}]),
+ io:format("Test:~p~n",[Test]),
+ io:format("Test2:~p~n",[Test2]),
+ Test2;
+
 
 parse({Key, Value}) when is_list(Value) andalso is_tuple(hd(Value)) ->
     Opts = string:join([wf:f("{~s}", [X]) || X <- [parse(X) || X <- Value]], ","),
