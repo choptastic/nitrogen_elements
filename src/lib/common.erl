@@ -6,7 +6,7 @@
 options_to_js(Options) ->
     wf:f("{ ~s }", [string:join([parse(X) || X <- Options], ",")]).
 
-parse({Key,Value}) when Key==formatoptions orelse Key ==editoptions ->
+parse({Key,Value}) when Key==formatoptions orelse Key ==editoptions orelse Key== searchoptions ->
     Js = options_to_js(Value),    
     wf:f("~s: ~s ", [Key, Js]);
 
