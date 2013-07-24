@@ -48,7 +48,11 @@ render_action(#jqgrid_event{target = Target, type = ?ONPAGESIZECHANGE, postback 
 render_action(#jqgrid_event{target = Target, type = ?ONRIGHTCLICKROW, postback = Postback}) ->
     #event{target = Target, type = ?ONRIGHTCLICKROW, postback = {?ONRIGHTCLICKROW, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +
-               \"&iRow=\" + arguments[2] + \"&iCol=\" + arguments[3]"}.
+               \"&iRow=\" + arguments[2] + \"&iCol=\" + arguments[3]"};
+render_action(#jqgrid_event{target = Target, type = ?ONSORTCOL, postback = Postback}) ->    
+    #event{target = Target, type = ?ONSORTCOL, postback = {?ONSORTCOL, Postback},
+	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&index=\" + arguments[1] +
+               \"&iCol=\" + arguments[2] + \"&sortorder=\" + arguments[3]"}.
 %% render_action(#jqgrid_event{target = Target, type = ?BEFOREPROCESSING, postback = Postback}) ->
 %%     #event{target = Target, type = ?BEFOREPROCESSING, postback = {?BEFOREPROCESSING, Postback},
 %% 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&data=\" + arguments[1] + \"&status=\" + arguments[2] +

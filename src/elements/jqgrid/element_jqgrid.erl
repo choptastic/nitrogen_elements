@@ -69,9 +69,6 @@ event({?ONDBLCLICKROW, Postback}) ->
     RowId = wf:q(rowid),
     IRow = wf:q(iRow),
     ICol = wf:q(iCol),
-    lager:debug("wf:q(rowid):~p",[wf:q(rowid)]),
-    lager:debug("wf:q(iRow):~p",[wf:q(iRow)]),
-    lager:debug("wf:q(iCol):~p",[wf:q(iCol)]),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {RowId, IRow, ICol}});
 event({?ONRIGHTCLICKROW, Postback}) ->
@@ -99,6 +96,13 @@ event({?BEFOREPROCESSING, Postback}) ->
     Status = wf:q(status),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {Data, Status}});
+event({?ONSORTCOL, Postback}) ->    
+    Data = wf:q(data),
+    Index = wf:q(index),
+    ICol = wf:q(iCol),
+    SortOrder = wf:q(sortorder),
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {Data, Index, ICol, SortOrder}});
 event(Event) ->
     ?PRINT({jqgrid_event, Event}),
     Module = wf:page_module(),
