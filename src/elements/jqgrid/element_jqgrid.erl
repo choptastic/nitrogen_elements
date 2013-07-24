@@ -29,7 +29,8 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     %% create grid
     case Record1#jqgrid.filter_toolbar of
         true ->
-            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);  $('~s')[0].triggerToolbar();})", [ID, Options,ID,FilterOptions,ID]));
+            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);  $('~s')[0].triggerToolbar(); })", [ID, Options,ID,FilterOptions,ID]));            
+             
         _ -> 
             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  })", [ID, Options]))
     end,
