@@ -30,7 +30,7 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     case Record1#jqgrid.filter_toolbar of
         true ->
 %%             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);  $('~s')[0].triggerToolbar(); setInterval(function() {$('~s').trigger(\"reloadGrid\",[{current:true}]);},5000  ); })", [ID, Options,ID,FilterOptions,ID,ID]));            
-            wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);self.setInterval(function(){$('~s').trigger('reloadGrid',[{current:true}]);},5000);})", [ID, Options,ID,FilterOptions,ID]));            
+             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);self.setInterval(function(){$('~s').trigger('reloadGrid',[{current:true}]);},10000);})", [ID, Options,ID,FilterOptions,ID]));            
             
         _ -> 
             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  })", [ID, Options]))
@@ -105,6 +105,11 @@ event({?ONSORTCOL, Postback}) ->
     SortOrder = wf:q(sortorder),
     Module = wf:page_module(),
     Module:jqgrid_event({Postback, {Data, Index, ICol, SortOrder}});
+event({?ONTOOLBARAFTERSEARCH, Postback}) ->    
+    
+    Module = wf:page_module(),
+    Module:jqgrid_event({Postback, {undefined}});
+
 event(Event) ->
     ?PRINT({jqgrid_event, Event}),
     Module = wf:page_module(),

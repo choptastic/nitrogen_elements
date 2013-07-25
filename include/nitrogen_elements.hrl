@@ -61,6 +61,7 @@
 %% not standard event to figure out the size of the page
 -define(ONPAGESIZECHANGE, "onpagesizechange").
 -define(ONSORTCOL, "jqGridSortCol").
+-define(ONTOOLBARAFTERSEARCH, "jqGridToolbarAfterSearch").
 -record(jqgrid, {?ELEMENT_BASE(element_jqgrid), options=[],filter_options=[], filter_toolbar=false}).
 -record(jqgrid_event, {?ACTION_BASE(action_jqgrid), event_name, type, postback}).
 

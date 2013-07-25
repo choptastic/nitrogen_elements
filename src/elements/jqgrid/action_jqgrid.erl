@@ -49,6 +49,9 @@ render_action(#jqgrid_event{target = Target, type = ?ONRIGHTCLICKROW, postback =
     #event{target = Target, type = ?ONRIGHTCLICKROW, postback = {?ONRIGHTCLICKROW, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&rowid=\" + arguments[1] +
                \"&iRow=\" + arguments[2] + \"&iCol=\" + arguments[3]"};
+render_action(#jqgrid_event{target = Target, type = ?ONTOOLBARAFTERSEARCH, postback = Postback}) ->
+    #event{target = Target, type = ?ONTOOLBARAFTERSEARCH, postback = {?ONTOOLBARAFTERSEARCH, Postback},
+       delegate = ?JQGRID_ELEMENT#jqgrid.module};
 render_action(#jqgrid_event{target = Target, type = ?ONSORTCOL, postback = Postback}) ->    
     #event{target = Target, type = ?ONSORTCOL, postback = {?ONSORTCOL, Postback},
 	   delegate = ?JQGRID_ELEMENT#jqgrid.module, extra_param="\"&index=\" + arguments[1] +
