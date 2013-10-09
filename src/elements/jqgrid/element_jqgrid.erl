@@ -30,7 +30,7 @@ render_element(#jqgrid{options = GridOptions} = Record) ->
     case Record1#jqgrid.filter_toolbar of
         true ->
 %%             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);  $('~s')[0].triggerToolbar(); setInterval(function() {$('~s').trigger(\"reloadGrid\",[{current:true}]);},5000  ); })", [ID, Options,ID,FilterOptions,ID,ID]));            
-             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);self.setInterval(function(){$('~s').trigger('reloadGrid',[{current:true}]);},10000);})", [ID, Options,ID,FilterOptions,ID]));            
+             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s); $('~s').jqGrid('filterToolbar', ~s);})", [ID, Options,ID,FilterOptions]));            
             
         _ -> 
             wf:wire(ID, wf:f("$(function(){$(obj('~s')).jqGrid(~s);  })", [ID, Options]))
