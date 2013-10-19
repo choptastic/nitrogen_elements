@@ -6,7 +6,7 @@
 -include ("nitrogen_elements.hrl").
 -include_lib("nitrogen_core/include/wf.hrl").
 -compile(export_all).
--compile([{parse_transform, lager_transform}]).
+%-compile([{parse_transform, lager_transform}]).
 
 
 reflect() -> record_info(fields, jqgrid).
